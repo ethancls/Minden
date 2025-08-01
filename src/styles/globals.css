@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 260 50% 98%;
+        --foreground: 260 20% 15%;
+        --card: 0 0% 100%;
+        --card-foreground: 260 20% 15%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 260 20% 15%;
+        --primary: 266 100% 60%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 260 30% 95%;
+        --secondary-foreground: 260 20% 15%;
+        --muted: 260 30% 95%;
+        --muted-foreground: 260 10% 45%;
+        --accent: 260 30% 95%;
+        --accent-foreground: 260 20% 15%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 260 20% 85%;
+        --input: 260 20% 85%;
+        --ring: 266 100% 60%;
+        --radius: 0.9rem;
+    }
+
+    :root[class~="dark"] {
+        --background: 260 15% 8%;
+        --foreground: 0 0% 98%;
+        --card: 260 20% 12%;
+        --card-foreground: 0 0% 98%;
+        --popover: 260 20% 12%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 266 100% 70%;
+        --primary-foreground: 260 20% 12%;
+        --secondary: 260 10% 25%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 260 10% 25%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 260 10% 25%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 60.8% 40.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 260 15% 20%;
+        --input: 260 15% 20%;
+        --ring: 266 100% 70%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-synthesis-weight: none;
+        text-rendering: optimizeLegibility;
+    }
+}
