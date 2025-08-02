@@ -29,7 +29,21 @@ export default async function Waitlist({ searchParams }: WaitlistProps) {
 
     const waitlistData = await getAllWaitlistUsersQuery();
 
-    const csvData = await json2csv.parseAsync(waitlistData);
+    // Gérer le cas où il n'y a pas de données pour éviter l'erreur CSV
+    let csvData = "";
+    try {
+        if (waitlistData && waitlistData.length > 0) {
+            csvData = await json2csv.parseAsync(waitlistData);
+        } else {
+            // Créer un CSV vide avec les en-têtes
+            csvData = await json2csv.parseAsync([], {
+                fields: ['id', 'email', 'createdAt', 'updatedAt']
+            });
+        }
+    } catch (error) {
+        console.warn("Erreur lors de la génération CSV:", error);
+        csvData = "id,email,createdAt,updatedAt\n";
+    }
 
     return (
         <AppPageShell

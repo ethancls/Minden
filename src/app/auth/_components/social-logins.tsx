@@ -27,7 +27,7 @@ export function SocialLogins() {
                 redirect: true,
             });
         } catch (error) {
-            toast.error("An error occurred. Please try again later.");
+            toast.error("Une erreur s'est produite. Veuillez réessayer plus tard.");
         } finally {
             setIsLoading(false);
         }
@@ -41,7 +41,7 @@ export function SocialLogins() {
                 redirect: true,
             });
         } catch (error) {
-            toast.error("An error occurred. Please try again later.");
+            toast.error("Une erreur s'est produite. Veuillez réessayer plus tard.");
         } finally {
             setIsLoading(false);
         }
@@ -56,7 +56,7 @@ export function SocialLogins() {
                 disabled={isLoading}
             >
                 <Icons.gitHub className="h-3.5 w-3.5 fill-foreground" />
-                <span>Continue with Github</span>
+                <span>Continuer avec Github</span>
             </Button>
             <Button
                 onClick={googleLogin}
@@ -65,7 +65,7 @@ export function SocialLogins() {
                 disabled={isLoading}
             >
                 <Icons.google className="h-3.5 w-3.5 fill-foreground" />
-                <span>Continue with Google</span>
+                <span>Continuer avec Google</span>
             </Button>
         </div>
     );

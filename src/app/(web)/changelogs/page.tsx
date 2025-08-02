@@ -37,10 +37,10 @@ export default async function ChangeLogPage() {
 
     return (
         <WebPageWrapper>
-            <WebPageHeader title="Change Log">
+            <WebPageHeader title="Nouveautés">
                 <p className="text-center text-base">
                     <span>
-                        All the latest features, fixes and work to{" "}
+                        Toutes les dernières fonctionnalités, corrections et travaux sur{" "}
                         {siteConfig.name}.
                     </span>
                 </p>

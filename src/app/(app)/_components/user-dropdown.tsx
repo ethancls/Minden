@@ -123,7 +123,7 @@ function UserDropdownContent({ user, navItems }: UserDropdownContentProps) {
                     <DropdownMenuItem asChild>
                         <button className="flex w-full cursor-pointer items-center gap-2 text-red-500 ">
                             <LogOutIcon className="h-4 w-4" />
-                            <span>Logout</span>
+                            <span>Se déconnecter</span>
                         </button>
                     </DropdownMenuItem>
                 </SignoutTrigger>

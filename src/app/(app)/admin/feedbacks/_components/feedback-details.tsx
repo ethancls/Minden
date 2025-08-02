@@ -18,7 +18,7 @@ export function FeedbackDetails(props: FeedbackDetailsProps) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <span className="cursor-pointer font-medium hover:underline">
+                <span className="cursor-pointer font-medium hover:underline text-primary">
                     {props.title}
                 </span>
             </DialogTrigger>

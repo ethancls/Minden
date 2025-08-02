@@ -24,6 +24,11 @@ export const siteUrls = {
     dashboard: {
         home: "/dashboard",
     },
+    teams: {
+        home: "/teams",
+        import: "/teams/import",
+        den: "/teams/den", // IA de role mining
+    },
     feedback: "/feedback",
     organization: {
         members: {
@@ -68,6 +73,9 @@ export const publicRoutes: string[] = [
 
 export const protectedRoutes: string[] = [
     siteUrls.dashboard.home,
+    siteUrls.teams.home,
+    siteUrls.teams.import,
+    siteUrls.teams.den,
     siteUrls.feedback,
     siteUrls.organization.members.home,
     siteUrls.organization.members.invite,

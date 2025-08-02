@@ -24,14 +24,25 @@ export default async function AdminDashPage() {
     const usersCountData = await getUsersCount();
     const usersChartData = usersCountData.usersCountByMonth;
 
-    const subscriptionsCountData = await getSubscriptionsCount({});
-
-    const activeSubscriptionsCountData = await getSubscriptionsCount({
-        status: "active",
-    });
+    // Désactiver LemonSqueezy si pas de clé API configurée
+    let subscriptionsCountData = { totalCount: 0, subscriptionsCountByMonth: [] };
+    let activeSubscriptionsCountData = { totalCount: 0 };
+    let revenueCountData = { totalRevenue: "€0", revenueCountByMonth: [] };
+    
+    try {
+        // Vérifier si LemonSqueezy est configuré
+        if (process.env.LEMONSQUEEZY_API_KEY && process.env.LEMONSQUEEZY_API_KEY.trim() !== "") {
+            subscriptionsCountData = await getSubscriptionsCount({});
+            activeSubscriptionsCountData = await getSubscriptionsCount({
+                status: "active",
+            });
+            revenueCountData = await getRevenueCount();
+        }
+    } catch (error) {
+        console.warn("LemonSqueezy not configured, using default values");
+    }
+    
     const subsChartData = subscriptionsCountData.subscriptionsCountByMonth;
-
-    const revenueCountData = await getRevenueCount();
     const revenueChartData = revenueCountData.revenueCountByMonth;
 
     return (
@@ -41,8 +52,7 @@ export default async function AdminDashPage() {
         >
             <div className="grid w-full gap-8">
                 <p className="text-sm">
-                    This a simple dashboard with Analytics, to see detailed
-                    Analytics go to{" "}
+                    Ceci est un tableau de bord simple avec Analytics. Pour voir des analyses détaillées, allez sur{" "}
                     <Link
                         href={siteUrls.admin.analytics}
                         className={cn(
@@ -53,37 +63,43 @@ export default async function AdminDashPage() {
                             }),
                         )}
                     >
-                        PostHog Dashboard
+                        Tableau de bord PostHog
                     </Link>
                 </p>
 
+                {(!process.env.LEMONSQUEEZY_API_KEY || process.env.LEMONSQUEEZY_API_KEY.trim() === "") && (
+                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-200">
+                        <p><strong>Note :</strong> LemonSqueezy n'est pas configuré. Les données de revenus et d'abonnements affichent des valeurs par défaut.</p>
+                    </div>
+                )}
+
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <StatsCard
-                        title="Users"
+                        title="Utilisateurs"
                         value={String(usersCountData.totalCount)}
                         Icon={Users2Icon}
-                        subText="Total users joined"
+                        subText="Total des utilisateurs inscrits"
                     />
 
                     <StatsCard
-                        title="Revenue"
+                        title="Revenus"
                         value={revenueCountData.totalRevenue}
                         Icon={DollarSignIcon}
-                        subText="Total revenue generated"
+                        subText="Revenus totaux générés"
                     />
 
                     <StatsCard
-                        title="Subscriptions"
+                        title="Abonnements"
                         value={String(subscriptionsCountData.totalCount)}
                         Icon={UserRoundPlusIcon}
-                        subText="Total subscriptions made"
+                        subText="Total des abonnements souscrits"
                     />
 
                     <StatsCard
-                        title="Active Subscriptions"
+                        title="Abonnements actifs"
                         value={String(activeSubscriptionsCountData.totalCount)}
                         Icon={UserRoundCheckIcon}
-                        subText="Current active subscriptions"
+                        subText="Abonnements actuellement actifs"
                     />
                 </div>
 

@@ -32,6 +32,7 @@ export const env = createEnv({
         LEMONSQUEEZY_API_KEY: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
         LEMONSQUEEZY_STORE_ID: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
         LEMONSQUEEZY_WEBHOOK_SECRET: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
+        OPENAI_API_KEY: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
     },
 
     /**
@@ -65,6 +66,7 @@ export const env = createEnv({
         LEMONSQUEEZY_API_KEY: process.env.LEMONSQUEEZY_API_KEY,
         LEMONSQUEEZY_STORE_ID: process.env.LEMONSQUEEZY_STORE_ID,
         LEMONSQUEEZY_WEBHOOK_SECRET: process.env.LEMONSQUEEZY_WEBHOOK_SECRET,
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY,
         NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
         NEXT_PUBLIC_WAITLIST_MODE: process.env.NEXT_PUBLIC_WAITLIST_MODE,
         NEXT_PUBLIC_MAINTENANCE_MODE: process.env.NEXT_PUBLIC_MAINTENANCE_MODE,

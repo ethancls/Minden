@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 
 export const defaultMetadata: Metadata = {
     icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon.ico",
+        icon: "/favicon.svg",
+        shortcut: "/favicon.svg",
         apple: "/icon-dark.png",
     },
     title: {

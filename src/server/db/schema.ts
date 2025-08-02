@@ -9,6 +9,7 @@ import {
     primaryKey,
     text,
     timestamp,
+    unique,
     varchar,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
@@ -44,6 +45,7 @@ export const usersRelations = relations(users, ({ many }) => ({
     accounts: many(accounts),
     membersToOrganizations: many(membersToOrganizations),
     feedback: many(feedback),
+    teamDatasets: many(teamDatasets),
 }));
 
 export const userInsertSchema = createInsertSchema(users, {
@@ -346,4 +348,50 @@ export const waitlistUsers = createTable("waitlistUser", {
 export const waitlistUsersSchema = createInsertSchema(waitlistUsers, {
     email: z.string().email("Email must be a valid email address"),
     name: z.string().min(3, "Name must be at least 3 characters long"),
+});
+
+// Role Mining and Team Analysis schema
+
+export const teamDatasets = createTable("team_dataset", {
+    id: varchar("id", { length: 255 })
+        .notNull()
+        .primaryKey()
+        .default(sql`gen_random_uuid()`),
+    name: varchar("name", { length: 255 }).notNull(), // Nom donné au dataset
+    description: text("description"),
+    orgId: text("orgId")
+        .notNull()
+        .references(() => organizations.id, { onDelete: "cascade" }),
+    importedBy: text("importedBy")
+        .notNull()
+        .references(() => users.id, { onDelete: "cascade" }),
+    fileName: varchar("fileName", { length: 255 }).notNull(),
+    status: varchar("status", { length: 50 }).notNull().default("pending"), // pending, processing, completed, failed
+    rawData: jsonb("rawData").notNull(), // JSON brut importé
+    processedData: jsonb("processedData"), // Données traitées pour la visualisation
+    graphData: jsonb("graphData"), // Structure de graphe pour la visualisation
+    analysisResults: jsonb("analysisResults"), // Résultats du role mining
+    errorLog: text("errorLog"),
+    importedAt: timestamp("importedAt", { mode: "date" }).notNull().defaultNow(),
+    lastAnalyzedAt: timestamp("lastAnalyzedAt", { mode: "date" }),
+});
+
+// Relations
+export const teamDatasetsRelations = relations(teamDatasets, ({ one }) => ({
+    organization: one(organizations, {
+        fields: [teamDatasets.orgId],
+        references: [organizations.id],
+    }),
+    importedByUser: one(users, {
+        fields: [teamDatasets.importedBy],
+        references: [users.id],
+    }),
+}));
+
+// Schemas for validation
+export const teamDatasetInsertSchema = createInsertSchema(teamDatasets, {
+    name: z.string().min(3, "Le nom du dataset doit contenir au moins 3 caractères"),
+    description: z.string().optional(),
+    fileName: z.string().min(1, "Le nom du fichier est requis"),
+    rawData: z.any(), // JSON data
 });

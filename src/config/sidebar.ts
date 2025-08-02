@@ -12,8 +12,17 @@ import {
     UserRoundCheckIcon,
     UserRoundPlusIcon,
     UsersRoundIcon,
+    UsersIcon,
+    BrainIcon,
+    NetworkIcon,
+    UploadIcon,
+    GitGraph,
+    LucideGitGraph,
+    GitBranchPlus,
+    GemIcon,
 } from "lucide-react";
 import { siteUrls } from "@/config/urls";
+import { AvatarIcon } from "@radix-ui/react-icons";
 
 /**
  * This file contains the configuration for the navigation items in the sidebar
@@ -70,6 +79,7 @@ export type SidebarNavItems = {
 const navIds = {
     admin: "admin",
     general: "general",
+    teams: "teams",
     org: "org",
     resources: "resources",
 };
@@ -86,27 +96,27 @@ const navigation: SidebarNavItems[] = [
                 href: siteUrls.admin.dashboard,
             },
             {
-                label: "Users",
+                label: "Utilisateurs",
                 icon: UsersRoundIcon,
                 href: siteUrls.admin.users,
             },
             {
-                label: "Organizations",
+                label: "Organisations",
                 icon: Building2Icon,
                 href: siteUrls.admin.organizations,
             },
             {
-                label: "Waitlist",
+                label: "Liste d'attente",
                 icon: ClipboardListIcon,
                 href: siteUrls.admin.waitlist,
             },
             {
-                label: "Analytics",
+                label: "Statistiques",
                 icon: BarChart4Icon,
                 href: siteUrls.admin.analytics,
             },
             {
-                label: "Feedback List",
+                label: "Feedbacks",
                 icon: HelpCircleIcon,
                 href: siteUrls.admin.feedbacks,
             },
@@ -114,7 +124,7 @@ const navigation: SidebarNavItems[] = [
     },
     {
         id: navIds.general,
-        label: "General",
+        label: "Général",
         showLabel: true,
         items: [
             {
@@ -125,33 +135,61 @@ const navigation: SidebarNavItems[] = [
         ],
     },
     {
-        id: navIds.org,
-        label: "Organization",
+        id: navIds.teams,
+        label: "Analyse d'équipes",
         showLabel: true,
         items: [
             {
-                label: "Members",
+                label: "Équipes",
+                icon: UsersIcon,
+                subMenu: [
+                    {
+                        label: "Datasets",
+                        icon: NetworkIcon,
+                        href: siteUrls.teams.home,
+                    },
+                    {
+                        label: "Importer",
+                        icon: UploadIcon,
+                        href: siteUrls.teams.import,
+                    },
+                ],
+            },
+            {
+                label: "Den",
+                icon: GemIcon,
+                href: siteUrls.teams.den,
+            },
+        ],
+    },
+    {
+        id: navIds.org,
+        label: "Organisation",
+        showLabel: true,
+        items: [
+            {
+                label: "Membres",
                 icon: UsersRoundIcon,
                 subMenu: [
                     {
-                        label: "Org Members",
+                        label: "Liste",
                         icon: UserRoundCheckIcon,
                         href: siteUrls.organization.members.home,
                     },
                     {
-                        label: "Invite Members",
+                        label: "Inviter",
                         icon: UserRoundPlusIcon,
                         href: siteUrls.organization.members.invite,
                     },
                 ],
             },
             {
-                label: "Plans & Billing",
+                label: "Abonnement",
                 icon: CreditCardIcon,
                 href: siteUrls.organization.plansAndBilling,
             },
             {
-                label: "Settings",
+                label: "Paramètres",
                 icon: Settings2Icon,
                 href: siteUrls.organization.settings,
             },
@@ -168,12 +206,12 @@ const navigation: SidebarNavItems[] = [
                 href: siteUrls.feedback,
             },
             {
-                label: "Docs",
+                label: "Documentation",
                 icon: BookTextIcon,
                 href: siteUrls.docs,
             },
             {
-                label: "Blog",
+                label: "Presse",
                 icon: PenLineIcon,
                 href: siteUrls.blogs,
             },

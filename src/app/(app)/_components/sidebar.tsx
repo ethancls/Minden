@@ -59,7 +59,7 @@ export async function Sidebar({
                     <Link
                         href={siteUrls.dashboard.home}
                         className={cn(
-                            "z-10 transition-transform hover:scale-90",
+                            "z-10 transition-transform hover:cursor-pointer",
                         )}
                     >
                         <Icons.logo
