@@ -10,17 +10,17 @@ RUN apk add --no-cache git
 COPY package.json package-lock.json* ./
 
 # Installation des dépendances avec npm
-RUN npm ci --only=production
+RUN npm ci
 
 # Copie du code source
 COPY . .
 
-# Exposition du port pour Next.js en production
+# Exposition du port pour Next.js en développement
 EXPOSE 3000
 
-# Configuration des variables d'environnement pour la production
-ENV NODE_ENV=production
+# Configuration des variables d'environnement pour le développement
+ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Commande par défaut pour la production
-CMD ["npm", "start"]
+# Commande par défaut pour le développement avec hot reload
+CMD ["npm", "run", "dev"]
