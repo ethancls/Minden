@@ -25,7 +25,7 @@ export const env = createEnv({
         GITHUB_CLIENT_SECRET: z.string(),
         RESEND_API_KEY: z.string(),
         UPLOADTHING_SECRET: z.string(),
-        UPLOADTHING_ID: z.string(),
+        UPLOADTHING_APP_ID: z.string(),
         LEMONSQUEEZY_API_KEY: z.string().optional(), // Rendu optionnel
         LEMONSQUEEZY_STORE_ID: z.string().optional(), // Rendu optionnel
         LEMONSQUEEZY_WEBHOOK_SECRET: z.string().optional(), // Rendu optionnel
@@ -58,7 +58,7 @@ export const env = createEnv({
         GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
         RESEND_API_KEY: process.env.RESEND_API_KEY,
         UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
-        UPLOADTHING_ID: process.env.UPLOADTHING_APP_ID, // Correction du nom
+        UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
         LEMONSQUEEZY_API_KEY: process.env.LEMONSQUEEZY_API_KEY,
         LEMONSQUEEZY_STORE_ID: process.env.LEMONSQUEEZY_STORE_ID,
         LEMONSQUEEZY_WEBHOOK_SECRET: process.env.LEMONSQUEEZY_WEBHOOK_SECRET,
