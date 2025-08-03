@@ -25,15 +25,11 @@ export const env = createEnv({
         GITHUB_CLIENT_SECRET: z.string(),
         RESEND_API_KEY: z.string(),
         UPLOADTHING_SECRET: z.string(),
-        UPLOADTHING_ID: z.string().optional(), // Rendu optionnel
+        UPLOADTHING_ID: z.string(),
         LEMONSQUEEZY_API_KEY: z.string().optional(), // Rendu optionnel
         LEMONSQUEEZY_STORE_ID: z.string().optional(), // Rendu optionnel
         LEMONSQUEEZY_WEBHOOK_SECRET: z.string().optional(), // Rendu optionnel
-        OPENAI_API_KEY: z.string().optional(), // Rendu optionnel
-        SMTP_HOST: z.string(),
-        SMTP_USERNAME: z.string(),
-        SMTP_PASSWORD: z.string(),
-        SMTP_PORT: z.string(),
+        OPENAI_API_KEY: z.string(),
     },
 
     /**
@@ -67,10 +63,6 @@ export const env = createEnv({
         LEMONSQUEEZY_STORE_ID: process.env.LEMONSQUEEZY_STORE_ID,
         LEMONSQUEEZY_WEBHOOK_SECRET: process.env.LEMONSQUEEZY_WEBHOOK_SECRET,
         OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-        SMTP_HOST: process.env.SMTP_HOST,
-        SMTP_USERNAME: process.env.SMTP_USERNAME,
-        SMTP_PASSWORD: process.env.SMTP_PASSWORD,
-        SMTP_PORT: process.env.SMTP_PORT,
         NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
         NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         NEXT_PUBLIC_WAITLIST_MODE: process.env.NEXT_PUBLIC_WAITLIST_MODE,
