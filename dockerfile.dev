@@ -18,17 +18,11 @@ FROM base AS runner
 ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Création d'un utilisateur non-root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
 # Copie des node_modules depuis deps
-COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=deps /app/node_modules ./node_modules
 
 # Copie du code source
-COPY --chown=nextjs:nodejs . .
-
-USER nextjs
+COPY . .
 
 # Exposition du port pour Next.js et Drizzle Studio
 EXPOSE 3000
