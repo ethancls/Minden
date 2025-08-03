@@ -24,15 +24,17 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copie du code source
 COPY . .
 
+# Exécution des migrations Drizzle
+RUN npm run db:push
+
+# Exécution de Drizzle Studio
+RUN npm run db:studio
+
 # Exposition du port pour Next.js et Drizzle Studio
 EXPOSE 3000
 EXPOSE 4983
 
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-
-# Scripts disponibles pour le développement et les migrations
-RUN docker exec -it container npm run db:push
-RUN docker exec -it container npm run db:studio
 
 CMD ["npm", "run", "dev"]
