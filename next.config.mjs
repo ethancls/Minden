@@ -14,6 +14,8 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // Configuration pour Docker standalone
+    output: "standalone",
     // Optionally, add any other Next.js config below
     experimental: {
         optimizePackageImports: ["lucide-react"],
