@@ -38,7 +38,7 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 # Scripts disponibles pour le développement et les migrations
-# docker exec -it container npm run db:push
-# docker exec -it container npm run db:studio
+RUN docker exec -it container npm run db:push
+RUN docker exec -it container npm run db:studio
 
 CMD ["npm", "run", "dev"]
