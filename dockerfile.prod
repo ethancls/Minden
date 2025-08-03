@@ -1,0 +1,29 @@
+FROM node:22-alpine
+
+# Installation de pnpm
+RUN npm install -g pnpm@8.10.0
+
+# Configuration du répertoire de travail
+WORKDIR /app
+
+# Installation des dépendances système nécessaires
+RUN apk add --no-cache git
+
+# Copie des fichiers de configuration du package manager
+COPY package.json pnpm-lock.yaml* ./
+
+# Installation des dépendances avec pnpm
+RUN pnpm install --frozen-lockfile
+
+# Copie du code source
+COPY . .
+
+# Exposition du port pour Next.js en production
+EXPOSE 3000
+
+# Configuration des variables d'environnement pour la production
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Commande par défaut pour la production
+CMD ["pnpm", "dev"]
