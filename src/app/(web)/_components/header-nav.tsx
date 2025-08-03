@@ -18,7 +18,7 @@ export function WebHeaderNav() {
 
     return (
         <nav className="flex items-center justify-center">
-            <ul className="flex items-center">
+            <ul className="flex items-center space-x-1">
                 {navigation.map((item) => (
                     <li key={item.id}>
                         <Link

@@ -29,6 +29,14 @@ export async function HeaderAuth() {
                     >
                         <span>Créer un compte</span>
                     </Link>
+                    <Link
+                        href={siteUrls.auth.login}
+                        className={buttonVariants({
+                            className: "flex items-center space-x-1 bg-pink-700 text-white hover:bg-pink-700/90",
+                        })}
+                    >
+                        <span>Se connecter</span>
+                    </Link>
                 </Fragment>
             )}
         </section>

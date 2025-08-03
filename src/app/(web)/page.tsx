@@ -30,7 +30,7 @@ export default async function HomePage() {
                     as="p"
                     className="text-center text-base text-muted-foreground sm:text-lg"
                 >
-                    Créer un compte sur Minden
+                    Créer un compte sur Minden et commencer à utiliser le role mining intelligent pour automatiser la gestion des rôles et des permissions dans vos applications. Minden vous aide à simplifier les processus métiers en analysant les données d'utilisation et en générant des recommandations basées sur l'IA.
                 </Balancer>
 
                 <div className="flex items-center gap-3">
