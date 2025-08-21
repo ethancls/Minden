@@ -14,6 +14,31 @@ If you are not familiar with the different technologies used in this project, pl
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
 
+## Docker Support
+
+Minden includes full Docker support for both development and production environments:
+
+### Quick Start with Docker
+```bash
+# Build containers locally
+chmod +x build-docker.sh
+./build-docker.sh
+
+# Run development version
+docker run -p 3000:3000 minden:dev
+
+# Run production version  
+docker run -p 3000:3000 minden:prod
+```
+
+### Automated Builds
+GitHub Actions automatically builds and publishes Docker containers:
+- `ghcr.io/ethancls/minden:dev` - Development builds
+- `ghcr.io/ethancls/minden:prod` - Production builds
+- `ghcr.io/ethancls/minden:latest` - Latest production release
+
+See [Docker Documentation](docs/docker.md) for detailed setup and usage instructions.
+
 ## Learn More
 
 To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
