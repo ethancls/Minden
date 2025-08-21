@@ -18,7 +18,8 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Next.js
+# Build Next.js with environment validation skipped for Docker builds
+ENV SKIP_ENV_VALIDATION=true
 RUN npm run build
 
 # Production
