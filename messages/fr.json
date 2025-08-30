@@ -1,0 +1,239 @@
+{
+  "app": {
+    "name": "Minden",
+    "tagline": "Honeypots intelligents. Réseaux plus sûrs.",
+    "ctaExplore": "Découvrir les tendances",
+    "ctaSignup": "Commencer"
+  },
+  "nav": {
+    "trending": "Tendances",
+    "categories": "Catégories",
+    "favorites": "Favoris",
+    "settings": "Réglages",
+    "myPills": "Mes pills",
+    "new": "Nouveau",
+    "logout": "Se déconnecter",
+    "searchPlaceholder": "Rechercher...",
+    "signin": "Se connecter",
+    "signup": "Créer un compte",
+    "machines": "Machines",
+    "alerts": "Alertes",
+    "subscriptions": "Abonnements",
+    "admin": "Admin",
+    "language": "Langue",
+    "lang": {
+      "en": "English - EN",
+      "fr": "Français - FR",
+      "ru": "Русский - RU"
+    }
+  },
+  "footer": {
+    "trending": "Tendances",
+    "categories": "Catégories",
+    "settings": "Réglages",
+    "github": "GitHub"
+  },
+  "landing": {
+    "heroTitle": "Protégez-vous et apprenez des attaques — en sécurité",
+    "heroSubtitle": "Déployez des honeypots réalistes, recevez les journaux en direct, et laissez l’IA détecter les menaces et réagir automatiquement par tenant.",
+    "ctaPlans": "Voir les offres",
+    "features": {
+      "f1": { "title": "Leurres réalistes", "desc": "Services crédibles pour tromper les attaquants." },
+      "f2": { "title": "IA & alertes", "desc": "Analyse des journaux et blocages automatiques." },
+      "f3": { "title": "Multi‑tenant", "desc": "Un tenant par organisation ou particulier." },
+      "f4": { "title": "Confiance & suivi", "desc": "Flux en direct, audit, export." }
+    },
+    "highlights": {
+      "h1": { "title": "Honeypots réalistes", "desc": "Leurre des attaquants avec des services crédibles." },
+      "h2": { "title": "Logs en direct", "desc": "Flux d’événements temps réel pour plus de visibilité." },
+      "h3": { "title": "Alertes IA", "desc": "Détecte, corrèle et bloque les activités suspectes." }
+    },
+    "ctaTitle": "Protégez votre entreprise dès maintenant",
+    "ctaSubtitle": "Passez à Pro pour des analyses avancées, alertes et automatisation.",
+    "ctaPerk1": "Annulable à tout moment",
+    "ctaPerk2": "Paiements sécurisés"
+  },
+  "settings": {
+    "title": "Réglages",
+    "language": "Langue de l’interface",
+    "fields": {
+      "email": "Email",
+      "name": "Nom",
+      "locale": "Langue"
+    },
+    "note": "Les formulaires d’édition et mises à jour du profil peuvent être ajoutés ici via des server actions."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page demandée n’existe pas ou a été déplacée.",
+    "goHome": "Retour à l’accueil"
+  },
+  "auth": {
+    "signin": {
+      "title": "Se connecter",
+      "desc": "Ravi de vous revoir sur Minden",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "or": "ou",
+      "magicPlaceholder": "Email pour lien magique",
+      "magicButton": "Envoyer le lien magique",
+      "oauth": {
+        "google": "Continuer avec Google",
+        "github": "Continuer avec GitHub",
+        "apple": "Continuer avec Apple"
+      },
+      "noAccount": "Pas de compte ?",
+      "createOne": "Créer un compte",
+      "verifyPrompt": "Votre email n’est pas vérifié. Vérifiez avec un code ou un lien magique.",
+      "resendCode": "Renvoyer le code",
+      "openInbox": "Ouvrir votre boîte mail",
+      "toast": {
+        "success": "Connexion réussie",
+        "failed": "Échec de la connexion",
+        "magicSent": "Lien magique envoyé",
+        "userNotFound": "Email introuvable",
+        "invalidPassword": "Mot de passe incorrect",
+        "emailNotVerified": "Email non vérifié. Vérifiez votre boîte mail."
+      }
+    },
+    "signup": {
+      "title": "Créer un compte",
+      "desc": "Rejoignez Minden",
+      "name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe (min 8 caractères)",
+      "submit": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "signin": "Se connecter",
+      "toast": {
+        "success": "Compte créé. Vérifiez votre email.",
+        "failed": "Échec de la création"
+      }
+    },
+    "verify": {
+      "title": "Vérifiez votre email",
+      "desc": "Entrez le code à 6 chiffres que nous vous avons envoyé",
+      "email": "Email",
+      "submit": "Vérifier",
+      "resend": "Renvoyer le code",
+      "codeSent": "Code envoyé.",
+      "verified": "Email vérifié. Vous pouvez maintenant vous connecter.",
+      "invalid": "Code invalide",
+      "emailRequired": "Email requis",
+      "rateLimited": "Trop de tentatives. Réessayez plus tard.",
+      "tip": "Ou connectez‑vous avec un lien magique depuis la page de connexion."
+    },
+    "mfa": {
+      "secretGenerated": "Secret généré",
+      "enabled": "MFA activée",
+      "invalid": "Code invalide"
+    }
+  },
+  "machines": {
+    "title": "Machines",
+    "switchTenant": "Changer de tenant",
+    "add": "Ajouter",
+    "none": "Aucune machine.",
+    "services": "Services",
+    "agentToken": "Token agent",
+    "agentTokenHelp": "Utilisez ce token dans l’agent pour authentifier la machine.",
+    "latestLogs": "Derniers logs",
+    "onboard": {
+      "method": "Méthode d’installation",
+      "token": "Token (copiez et gardez-le en sécurité)",
+      "copy": "Copier",
+      "command": "Commande d’installation",
+      "tokenNote": "Le token est affiché une seule fois. Rotations en cas de compromission.",
+      "waiting": "En attente de la connexion de l’agent...",
+      "connected": "Agent connecté",
+      "lastHeartbeat": "Dernier heartbeat",
+      "continue": "Aller à la machine"
+    }
+  },
+  "tenants": {
+    "title": "Espace tenant",
+    "subtitle": "Sélectionnez un tenant actif pour accéder aux machines.",
+    "yourTenants": "Vos tenants",
+    "select": "Sélectionner",
+    "none": "Aucun tenant. Créez une demande.",
+    "requestTitle": "Demander un nouveau tenant",
+    "requestPlaceholder": "Nom de l’entreprise / particulier",
+    "requestBtn": "Demander",
+    "pendingNote": "Votre tenant sera en statut PENDING jusqu’à validation par l’équipe.",
+    "toast": {
+      "selected": "Tenant sélectionné",
+      "created": "Demande de tenant envoyée"
+    }
+  }
+  ,
+  "subscriptions": {
+    "free": {
+      "name": "Gratuit",
+      "price": "0€",
+      "features": {
+        "0": "Lire jusqu’à 10 événements/jour",
+        "1": "Créer un tenant",
+        "2": "Logs en direct basiques"
+      },
+      "cta": "Commencer"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "19€ / mois",
+      "features": {
+        "0": "Logs & alertes illimités",
+        "1": "Analyse IA & blocage auto",
+        "2": "Plusieurs machines par tenant"
+      },
+      "cta": "Passer à Pro"
+    },
+    "team": {
+      "name": "Équipe",
+      "price": "49€ / mois",
+      "features": {
+        "0": "Collaboration en équipe",
+        "1": "Tableaux de bord partagés",
+        "2": "Support prioritaire"
+      },
+      "cta": "Contacter les ventes"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Vue d’ensemble de l’activité"
+    },
+    "metrics": {
+      "users": "Utilisateurs",
+      "tenants": "Tenants",
+      "machines": "Machines",
+      "logs": "Événements de log"
+    },
+    "charts": {
+      "machinesCreated14": "Machines créées (14 jours)",
+      "newUsers": "Nouveaux utilisateurs"
+    },
+    "users": {
+      "title": "Utilisateurs",
+      "subtitle": "Utilisateurs récents (100 derniers)",
+      "search": "Rechercher des utilisateurs...",
+      "email": "Email",
+      "name": "Nom",
+      "role": "Rôle",
+      "date": "Date",
+      "empty": "Aucun utilisateur"
+    },
+    "settings": {
+      "title": "Paramètres système",
+      "smtp": "SMTP",
+      "host": "Hôte",
+      "port": "Port",
+      "user": "Utilisateur",
+      "password": "Mot de passe",
+      "from": "Expéditeur",
+      "save": "Enregistrer",
+      "toast": { "saved": "Paramètres enregistrés" }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+---
+services:
+  postgres:
+    image: postgres:15
+    container_name: minden_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-minden}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-minden}
+      POSTGRES_DB: ${POSTGRES_DB:-minden}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-minden}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  s3:
+    image: minio/minio:latest
+    container_name: minden_s3
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${S3_ROOT_USER:-minio}
+      MINIO_ROOT_PASSWORD: ${S3_ROOT_PASSWORD:-minio123}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - s3_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  s3-setup:
+    image: minio/mc:latest
+    depends_on:
+      s3:
+        condition: service_healthy
+    environment:
+      MC_HOST_minio: http://${S3_ROOT_USER:-minio}:${S3_ROOT_PASSWORD:-minio123}@s3:9000
+      S3_BUCKET: ${S3_BUCKET:-minden}
+    entrypoint: ["/bin/sh", "-c"]
+    command: "mc mb -p minio/$S3_BUCKET || true && mc anonymous set download minio/$S3_BUCKET || true"
+    restart: "no"
+volumes:
+  db_data:
+  s3_data:
