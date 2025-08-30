@@ -30,8 +30,14 @@ export const InputOTPSlot = React.forwardRef<HTMLDivElement, React.ComponentProp
         )}
         role="textbox"
         tabIndex={0}
-        onClick={() => inputOTP?.inputRef?.current?.focus()}
-        onFocus={() => inputOTP?.inputRef?.current?.focus()}
+        onClick={() => {
+          const otpInput = inputOTP as { inputRef?: { current?: HTMLInputElement } };
+          otpInput?.inputRef?.current?.focus();
+        }}
+        onFocus={() => {
+          const otpInput = inputOTP as { inputRef?: { current?: HTMLInputElement } };
+          otpInput?.inputRef?.current?.focus();
+        }}
         {...props}
       >
         {char?.char ?? (char?.hasFakeCaret ? "|" : null)}

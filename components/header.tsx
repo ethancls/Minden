@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Moon, Sun, Menu, Settings, CreditCard, LogOut, Gauge } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useSession, signOut } from 'next-auth/react';
+import type { SessionUser } from '@/models/types';
 import { Sheet, SheetTrigger, SheetContent, SheetClose } from '@/components/ui/sheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -53,12 +54,23 @@ export function Header({ locale }: { locale: string }) {
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link href={`${base}/machines`} className="text-muted-foreground hover:text-foreground">
-            {t('machines')}
-          </Link>
-          <Link href={`${base}/subscriptions`} className="text-muted-foreground hover:text-foreground">
-            {t('subscriptions')}
-          </Link>
+          {session?.user ? (
+            <>
+              <Link href={`${base}/dashboard`} className="text-muted-foreground hover:text-foreground">
+                {t('dashboard')}
+              </Link>
+              <Link href={`${base}/machines`} className="text-muted-foreground hover:text-foreground">
+                {t('machines')}
+              </Link>
+              <Link href={`${base}/alerts`} className="text-muted-foreground hover:text-foreground">
+                {t('alerts')}
+              </Link>
+            </>
+          ) : (
+            <Link href={`${base}/subscriptions`} className="text-muted-foreground hover:text-foreground">
+              {t('subscriptions')}
+            </Link>
+          )}
         </nav>
 
         <div className="ml-auto hidden items-center gap-2 md:flex">
@@ -74,6 +86,7 @@ export function Header({ locale }: { locale: string }) {
               <SelectItem value="en">{t('lang.en')}</SelectItem>
               <SelectItem value="fr">{t('lang.fr')}</SelectItem>
               <SelectItem value="ru">{t('lang.ru')}</SelectItem>
+              <SelectItem value="ja">{t('lang.ja')}</SelectItem>
             </SelectContent>
           </Select>
           {session?.user ? (
@@ -81,7 +94,7 @@ export function Header({ locale }: { locale: string }) {
               <DropdownMenu>
                 <DropdownMenuTrigger className="focus:outline-none">
                   <Avatar>
-                    <AvatarImage src={(session.user as any).image || ''} alt="" />
+                    <AvatarImage src={(session.user as SessionUser).image || ''} alt="" />
                     <AvatarFallback>{(session.user?.name || 'U').slice(0,1).toUpperCase()}</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
@@ -99,7 +112,7 @@ export function Header({ locale }: { locale: string }) {
                   <DropdownMenuItem asChild>
                     <Link href={`${base}/subscriptions`} className="flex items-center gap-2"><CreditCard className="h-4 w-4" />{t('subscriptions')}</Link>
                   </DropdownMenuItem>
-                  {(session.user as any).role === 'ADMIN' && (
+                  {(session.user as SessionUser).role === 'ADMIN' && (
                     <DropdownMenuItem asChild>
                       <Link href={`${base}/admin`} className="flex items-center gap-2"><Gauge className="h-4 w-4" />{t('admin')}</Link>
                     </DropdownMenuItem>
@@ -153,7 +166,7 @@ export function Header({ locale }: { locale: string }) {
                 {session?.user ? (
                   <div className="flex items-center gap-3 pb-2 border-b">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={(session.user as any).image || ''} alt="" />
+                    <AvatarImage src={(session.user as SessionUser).image || ''} alt="" />
                       <AvatarFallback>{(session.user?.name || 'U').slice(0,1).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
@@ -164,11 +177,20 @@ export function Header({ locale }: { locale: string }) {
                 ) : null}
                 {/* Liens principaux */}
                 <div className="grid gap-2 pb-2 border-b">
-                  <SheetClose asChild><Link href={`${base}/machines`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('machines')}</Link></SheetClose>
-                  <SheetClose asChild><Link href={`${base}/subscriptions`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><CreditCard className="h-4 w-4" />{t('subscriptions')}</Link></SheetClose>
-                  <SheetClose asChild><Link href={`${base}/settings`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Settings className="h-4 w-4" />{t('settings')}</Link></SheetClose>
-                  {(session?.user as any)?.role === 'ADMIN' && (
-                    <SheetClose asChild><Link href={`${base}/admin`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('admin')}</Link></SheetClose>
+                  {session?.user ? (
+                    <>
+                      <SheetClose asChild><Link href={`${base}/dashboard`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('dashboard')}</Link></SheetClose>
+                      <SheetClose asChild><Link href={`${base}/machines`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('machines')}</Link></SheetClose>
+                      <SheetClose asChild><Link href={`${base}/alerts`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('alerts')}</Link></SheetClose>
+                      <SheetClose asChild><Link href={`${base}/settings`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Settings className="h-4 w-4" />{t('settings')}</Link></SheetClose>
+                      {(session?.user as SessionUser)?.role === 'ADMIN' && (
+                        <SheetClose asChild><Link href={`${base}/admin`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><Gauge className="h-4 w-4" />{t('admin')}</Link></SheetClose>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <SheetClose asChild><Link href={`${base}/subscriptions`} className="rounded-md px-2 py-2 hover:bg-accent flex items-center gap-2"><CreditCard className="h-4 w-4" />{t('subscriptions')}</Link></SheetClose>
+                    </>
                   )}
                 </div>
                 {/* Authentification / Déconnexion */}

@@ -1,0 +1,315 @@
+{
+  "app": {
+    "name": "Minden",
+    "tagline": "スマートなハニーポット。簡単にネットワークを守る。",
+    "ctaExplore": "トレンドを見る",
+    "ctaSignup": "今すぐ始める"
+  },
+  "dashboard": { "title": "ダッシュボード" },
+  "alerts": { "title": "セキュリティアラート" },
+  "nav": {
+    "trending": "トレンド",
+    "categories": "カテゴリ",
+    "favorites": "お気に入り",
+    "settings": "設定",
+    "myPills": "マイピルズ",
+    "new": "新規",
+    "logout": "ログアウト",
+    "searchPlaceholder": "検索...",
+    "signin": "ログイン",
+    "signup": "新規登録",
+    "dashboard": "ダッシュボード",
+    "machines": "マシン",
+    "alerts": "アラート",
+    "subscriptions": "サブスクリプション",
+    "admin": "管理者",
+    "language": "言語",
+    "lang": {
+      "en": "English - EN",
+      "fr": "Français - FR",
+      "ru": "Русский - RU",
+      "ja": "日本語 - JA"
+    }
+  },
+  "footer": {
+    "trending": "トレンド",
+    "categories": "カテゴリ",
+    "settings": "設定",
+    "github": "GitHub"
+  },
+  "landing": {
+    "heroTitle": "攻撃から守り、学ぶ — 安心して",
+    "heroSubtitle": "リアルなハニーポットを展開し、ライブログをストリーム。AIが脅威を検知し、自動で対応します。",
+    "ctaPlans": "プランを見る",
+    "features": {
+      "f1": { "title": "リアルなデコイ", "desc": "攻撃者を欺く信頼性の高いサービス。" },
+      "f2": { "title": "AI & アラート", "desc": "スマートなログ解析と自動ブロック。" },
+      "f3": { "title": "マルチ組織", "desc": "企業や個人ごとに専用スペース。" },
+      "f4": { "title": "信頼と監視", "desc": "ライブストリーム、監査、データエクスポート。" }
+    },
+    "highlights": {
+      "h1": { "title": "高度なハニーポット", "desc": "多様なサービスで攻撃者を欺く。" },
+      "h2": { "title": "ライブログ", "desc": "リアルタイムイベントで最適な可視性。" },
+      "h3": { "title": "AIアラート", "desc": "AIで疑わしい活動を検知・遮断。" }
+    },
+    "ctaTitle": "今すぐビジネスを守ろう",
+    "ctaSubtitle": "Proにアップグレードして高度な分析・アラート・自動化を利用。",
+    "ctaPerk1": "いつでもキャンセル可能",
+    "ctaPerk2": "100%安全な決済"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "インターフェース言語",
+    "fields": {
+      "email": "メールアドレス",
+      "name": "氏名",
+      "locale": "言語"
+    },
+    "note": "編集フォームやプロフィール更新はサーバーアクションで追加できます。",
+    "passkeys": {
+      "title": "パスキー",
+      "description": "パスワードレスサインインのためのパスキーを管理します。",
+      "addButton": "新しいパスキーを追加",
+      "loading": "パスキーを読み込み中...",
+      "noKeys": "登録済みのパスキーはありません。",
+      "fetchError": "パスキーを読み込めませんでした。",
+      "addSuccess": "パスキーが正常に追加されました。",
+      "addError": "パスキーの追加に失敗しました。",
+      "nameRequiredError": "パスキーに名前を付けてください。",
+      "deleteSuccess": "パスキーが削除されました。",
+      "deleteError": "パスキーの削除に失敗しました。",
+      "table": {
+        "name": "名前",
+        "createdAt": "追加日",
+        "lastUsed": "最終使用日",
+        "neverUsed": "なし"
+      },
+      "addDialog": {
+        "title": "新しいパスキーを追加",
+        "description": "ブラウザまたはデバイスの指示に従って設定を完了してください。",
+        "inputLabel": "パスキー名",
+        "inputPlaceholder": "例：私のMacBook Pro",
+        "cancel": "キャンセル",
+        "add": "追加",
+        "adding": "追加中..."
+      },
+      "deleteDialog": {
+        "title": "このパスキーを削除しますか？",
+        "description": "「{name}」という名前のパスキーを本当に削除しますか？この操作は元に戻せません。",
+        "cancel": "キャンセル",
+        "delete": "削除"
+      },
+      "errors": {
+        "authenticatorPreviouslyRegistered": "この認証デバイスは既に登録されています。",
+        "registrationOptionsError": "登録オプションの取得に失敗しました。",
+        "verificationError": "検証に失敗しました。",
+        "missingCredentialData": "認証情報が不足しています。",
+        "unauthorized": "ログインが必要です。",
+        "invalidInput": "入力データが無効です。",
+        "noChallenge": "登録チャレンジが見つかりません。",
+        "generalError": "リクエストの処理中にエラーが発生しました。"
+      }
+    }
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しないか、移動しました。",
+    "goHome": "ホームに戻る"
+  },
+  "auth": {
+    "signin": {
+      "title": "ログイン",
+      "desc": "Mindenへようこそ",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "submit": "ログイン",
+      "or": "または",
+      "magicPlaceholder": "マジックリンク用メールアドレス",
+      "magicButton": "マジックリンク送信",
+      "oauth": {
+        "google": "Googleで続行",
+        "github": "GitHubで続行",
+        "apple": "Appleで続行"
+      },
+      "passkey": {
+        "button": "パスキーでサインイン",
+        "error": "パスキー認証に失敗しました",
+        "notSupported": "このブラウザではパスキーがサポートされていません"
+      },
+      "noAccount": "アカウント未登録ですか？",
+      "createOne": "新規登録",
+      "verifyPrompt": "メールアドレスが未認証です。コードまたはマジックリンクで認証してください。",
+      "resendCode": "コード再送",
+      "openInbox": "受信箱を開く",
+      "toast": {
+        "success": "ログイン成功",
+        "failed": "ログイン失敗",
+        "magicSent": "マジックリンク送信済み",
+        "invalidCreds": "メールアドレスまたはパスワードが間違っています",
+        "emailNotVerified": "メールアドレス未認証。受信箱を確認してください。"
+      }
+    },
+    "signup": {
+      "title": "新規登録",
+      "desc": "Mindenに参加する",
+      "name": "氏名",
+      "email": "メールアドレス",
+      "password": "パスワード（8文字以上）",
+      "submit": "アカウント作成",
+      "haveAccount": "すでに登録済みですか？",
+      "signin": "ログイン",
+      "toast": {
+        "success": "アカウント作成完了。メールを確認してください。",
+        "failed": "登録失敗",
+        "emailTaken": "このメールアドレスは既に使用されています",
+        "invalidInput": "情報を確認してください",
+        "rateLimited": "試行回数が多すぎます。後でもう一度お試しください。"
+      }
+    },
+    "verify": {
+      "title": "メール認証",
+      "desc": "送信された6桁のコードを入力してください",
+      "email": "メールアドレス",
+      "submit": "認証",
+      "resend": "コード再送",
+      "codeSent": "コード送信済み。",
+      "verified": "メール認証完了。ログインできます。",
+      "invalid": "無効なコード",
+      "emailRequired": "メールアドレス必須",
+      "rateLimited": "試行回数が多すぎます。後でもう一度お試しください。",
+      "tip": "またはログインページからマジックリンクでログインできます。"
+    },
+    "mfa": {
+      "secretGenerated": "シークレット生成済み",
+      "enabled": "二要素認証有効化",
+      "invalid": "無効なコード"
+    }
+  },
+  "machines": {
+    "title": "マシン",
+    "switchTenant": "組織を切り替え",
+    "add": "マシン追加",
+    "none": "登録済みマシンはありません。",
+    "services": "監視サービス",
+    "agentToken": "エージェントトークン",
+    "agentTokenHelp": "このトークンをエージェントで使用し、マシンを認証します。",
+    "latestLogs": "最新ログ",
+    "edit": "マシン編集",
+    "delete": "削除",
+    "save": "保存",
+    "name": "マシン名",
+    "tokenHidden": "セキュリティのためトークンは非表示です。オンボーディングでローテーション可能。",
+    "rotateToken": "トークン再発行",
+    "newToken": "新しいエージェントトークン",
+    "tokenShownOnce": "このトークンは一度しか表示されません。安全に保管してください。",
+    "close": "閉じる",
+    "confirmDelete": {
+      "title": "削除確認",
+      "description": "この操作は元に戻せません。マシンと関連データ（サービス、ログ、アラート）は完全に削除されます。",
+      "confirm": "削除",
+      "cancel": "キャンセル"
+    },
+    "onboard": {
+      "method": "インストール方法",
+      "token": "トークン（コピーして安全に保管）",
+      "copy": "コピー",
+      "command": "インストールコマンド",
+      "tokenNote": "トークンは一度だけ表示されます。漏洩時はローテーション推奨。",
+      "waiting": "エージェントの接続待ち...",
+      "connected": "エージェント接続済み",
+      "lastHeartbeat": "最終信号受信",
+      "continue": "マシンへ進む"
+    },
+    "toast": {
+      "saved": "マシンの更新が完了しました",
+      "deleted": "マシン削除済み",
+      "connected": "エージェント接続済み",
+      "tokenRotated": "トークン再発行済み",
+      "failed": "操作に失敗しました"
+    }
+  },
+  "tenants": {
+    "title": "組織スペース",
+    "subtitle": "アクティブな組織を選択してマシンにアクセス。",
+    "yourTenants": "あなたの組織",
+    "select": "選択",
+    "none": "組織がありません。リクエストを作成してください。",
+    "requestTitle": "新しい組織をリクエスト",
+    "requestPlaceholder": "会社名または個人名",
+    "requestBtn": "リクエスト",
+    "pendingNote": "組織は承認されるまでPENDING状態です。",
+    "toast": {
+      "selected": "組織が選択されました",
+      "created": "リクエストが送信されました"
+    }
+  },
+  "subscriptions": {
+    "free": {
+      "name": "無料",
+      "price": "0円",
+      "features": {
+        "0": "1日最大10イベントまで",
+        "1": "組織作成",
+        "2": "基本的なライブログ"
+      },
+      "cta": "無料で始める"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "月額1,900円",
+      "features": {
+        "0": "無制限のログ＆アラート",
+        "1": "AI解析＆自動ブロック",
+        "2": "複数マシンを組織で管理"
+      },
+      "cta": "Proにアップグレード"
+    },
+    "team": {
+      "name": "チーム",
+      "price": "月額4,900円",
+      "features": {
+        "0": "チームでのコラボレーション",
+        "1": "共有ダッシュボード",
+        "2": "優先サポート"
+      },
+      "cta": "営業に問い合わせ"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "ダッシュボード",
+      "subtitle": "システム活動の概要"
+    },
+    "metrics": {
+      "users": "ユーザー",
+      "tenants": "組織",
+      "machines": "マシン",
+      "logs": "ログイベント"
+    },
+    "charts": {
+      "machinesCreated14": "14日間で作成されたマシン",
+      "newUsers": "新規ユーザー"
+    },
+    "users": {
+      "title": "ユーザー",
+      "subtitle": "最近のユーザー（最新100件）",
+      "search": "ユーザー検索...",
+      "email": "メールアドレス",
+      "name": "氏名",
+      "role": "役割",
+      "date": "登録日",
+      "empty": "ユーザーが見つかりません"
+    },
+    "settings": {
+      "title": "システム設定",
+      "smtp": "SMTPサーバー",
+      "host": "ホスト",
+      "port": "ポート",
+      "user": "ユーザー",
+      "password": "パスワード",
+      "from": "送信者",
+      "save": "保存",
+      "toast": { "saved": "設定が保存されました" }
+    }
+  }
+}

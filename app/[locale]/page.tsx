@@ -1,10 +1,17 @@
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { Sparkles, Globe2, ShieldCheck, Bot, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 export default async function LandingPage({ params: { locale } }: { params: { locale: string } }) {
+  const session = await getServerSession(authOptions);
+  if (session?.user) {
+    redirect(`/${locale}/dashboard`);
+  }
   const tApp = await getTranslations({ locale, namespace: 'app' });
   const tLanding = await getTranslations({ locale, namespace: 'landing' });
 

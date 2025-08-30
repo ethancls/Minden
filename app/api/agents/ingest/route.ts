@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         break;
       }
       case 'services': {
-        const services: Array<{ name: string; port?: number; protocol?: string; status?: string; meta?: unknown }>= payload || [];
+        const services: Array<{ name: string; port?: number; protocol?: string; status?: string; meta?: unknown }> = payload || [];
         console.log(`[SERVICES] Machine ${agent.machineId}: ${services.length} services détectés`);
         services.forEach((s, i) => {
           console.log(`  ${i + 1}. ${s.name} (${s.protocol}:${s.port}) - ${s.status}`);
@@ -48,20 +48,41 @@ export async function POST(req: NextRequest) {
         if (agent.machineId) {
           // naive replace-all for MVP
           await prisma.service.deleteMany({ where: { machineId: agent.machineId } });
+          const mapStatus = (raw?: string): 'RUNNING' | 'STOPPED' | 'UNKNOWN' => {
+            const v = String(raw || '').toUpperCase();
+            if (v === 'RUNNING' || v === 'LISTEN' || v === 'LISTENING' || v === 'OPEN' || v === 'UP') return 'RUNNING';
+            if (v === 'STOPPED' || v === 'CLOSED' || v === 'DOWN') return 'STOPPED';
+            return 'UNKNOWN';
+          };
           for (const s of services) {
-            await prisma.service.create({ data: { machineId: agent.machineId, name: s.name, port: s.port ?? null, protocol: s.protocol, status: (s.status as 'RUNNING' | 'STOPPED' | 'UNKNOWN') ?? 'UNKNOWN', meta: s.meta ?? undefined } });
+            await prisma.service.create({
+              data: {
+                machineId: agent.machineId,
+                name: s.name,
+                port: s.port ?? null,
+                protocol: s.protocol,
+                status: mapStatus(s.status),
+                meta: s.meta ?? undefined,
+              },
+            });
           }
         }
         break;
       }
       case 'log': {
-        const { level = 'INFO', source = 'AGENT', message = '', payload: data } = payload || {};
-        console.log(`[LOG] Machine ${agent.machineId}: [${level}] ${source} - ${message}`);
+        const lp = (payload || {}) as { level?: string; source?: string; message?: string; payload?: unknown };
+        const level = lp.level ?? 'INFO';
+        const source = lp.source ?? 'AGENT';
+        const message = lp.message ?? '';
+        const data = (lp as { payload?: unknown }).payload;
+        const L = String(level || 'INFO').toUpperCase();
+        const normLevel = (['INFO','WARN','ERROR'].includes(L) ? L : 'INFO') as 'INFO' | 'WARN' | 'ERROR';
+        console.log(`[LOG] Machine ${agent.machineId}: [${normLevel}] ${source} - ${message}`);
         if (data) {
           console.log(`[LOG] Data:`, JSON.stringify(data, null, 2));
         }
         if (agent.machineId) {
-          await prisma.logEvent.create({ data: { machineId: agent.machineId, level, source, message, payload: data ?? undefined } });
+          await prisma.logEvent.create({ data: { machineId: agent.machineId, level: normLevel, source, message, payload: data ?? undefined } });
         }
         break;
       }

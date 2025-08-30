@@ -1,3 +1,4 @@
+import { SessionUser } from '@/models/types';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -8,7 +9,7 @@ import { rateLimit, getClientIp } from '@/lib/rate-limit';
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
-  const userId = (session.user as any).id as string;
+  const userId = (session.user as SessionUser).id;
   const ip = getClientIp(req.headers);
   const rl = rateLimit(`mfaVerify:ip:${ip}`, 20, 10 * 60_000);
   if (!rl.ok) return NextResponse.json({ error: 'RATE_LIMITED' }, { status: 429 });

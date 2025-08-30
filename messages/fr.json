@@ -1,67 +1,115 @@
 {
   "app": {
     "name": "Minden",
-    "tagline": "Honeypots intelligents. Réseaux plus sûrs.",
-    "ctaExplore": "Découvrir les tendances",
-    "ctaSignup": "Commencer"
+    "tagline": "Honeypots intelligents. Sécurisez vos réseaux avec simplicité.",
+    "ctaExplore": "Explorer les tendances",
+    "ctaSignup": "Commencer maintenant"
   },
+  "dashboard": { "title": "Tableau de bord" },
+  "alerts": { "title": "Alertes de sécurité" },
   "nav": {
     "trending": "Tendances",
     "categories": "Catégories",
     "favorites": "Favoris",
-    "settings": "Réglages",
-    "myPills": "Mes pills",
+    "settings": "Paramètres",
+    "myPills": "Mes pilules",
     "new": "Nouveau",
-    "logout": "Se déconnecter",
+    "logout": "Déconnexion",
     "searchPlaceholder": "Rechercher...",
-    "signin": "Se connecter",
-    "signup": "Créer un compte",
+    "signin": "Connexion",
+    "signup": "Inscription",
+    "dashboard": "Tableau de bord",
     "machines": "Machines",
     "alerts": "Alertes",
     "subscriptions": "Abonnements",
-    "admin": "Admin",
+    "admin": "Administration",
     "language": "Langue",
     "lang": {
       "en": "English - EN",
       "fr": "Français - FR",
-      "ru": "Русский - RU"
+      "ru": "Русский - RU",
+      "ja": "日本語 - JA"
     }
   },
   "footer": {
     "trending": "Tendances",
     "categories": "Catégories",
-    "settings": "Réglages",
+    "settings": "Paramètres",
     "github": "GitHub"
   },
   "landing": {
-    "heroTitle": "Protégez-vous et apprenez des attaques — en sécurité",
-    "heroSubtitle": "Déployez des honeypots réalistes, recevez les journaux en direct, et laissez l’IA détecter les menaces et réagir automatiquement par tenant.",
-    "ctaPlans": "Voir les offres",
+    "heroTitle": "Protégez-vous et apprenez des attaques — en toute sécurité",
+    "heroSubtitle": "Déployez des honeypots réalistes, recevez les journaux en direct et laissez l’IA détecter les menaces et réagir automatiquement pour chaque organisation.",
+    "ctaPlans": "Découvrir les offres",
     "features": {
-      "f1": { "title": "Leurres réalistes", "desc": "Services crédibles pour tromper les attaquants." },
-      "f2": { "title": "IA & alertes", "desc": "Analyse des journaux et blocages automatiques." },
-      "f3": { "title": "Multi‑tenant", "desc": "Un tenant par organisation ou particulier." },
-      "f4": { "title": "Confiance & suivi", "desc": "Flux en direct, audit, export." }
+      "f1": { "title": "Leurres réalistes", "desc": "Des services crédibles pour tromper les attaquants." },
+      "f2": { "title": "IA & alertes", "desc": "Analyse intelligente des journaux et blocages automatiques." },
+      "f3": { "title": "Multi‑organisation", "desc": "Un espace dédié par entreprise ou utilisateur." },
+      "f4": { "title": "Confiance & suivi", "desc": "Flux en temps réel, audit et export des données." }
     },
     "highlights": {
-      "h1": { "title": "Honeypots réalistes", "desc": "Leurre des attaquants avec des services crédibles." },
-      "h2": { "title": "Logs en direct", "desc": "Flux d’événements temps réel pour plus de visibilité." },
-      "h3": { "title": "Alertes IA", "desc": "Détecte, corrèle et bloque les activités suspectes." }
+      "h1": { "title": "Honeypots avancés", "desc": "Leurrez les attaquants avec des services crédibles et variés." },
+      "h2": { "title": "Journaux en direct", "desc": "Suivi des événements en temps réel pour une visibilité optimale." },
+      "h3": { "title": "Alertes IA", "desc": "Détection, corrélation et blocage des activités suspectes par intelligence artificielle." }
     },
-    "ctaTitle": "Protégez votre entreprise dès maintenant",
-    "ctaSubtitle": "Passez à Pro pour des analyses avancées, alertes et automatisation.",
-    "ctaPerk1": "Annulable à tout moment",
-    "ctaPerk2": "Paiements sécurisés"
+    "ctaTitle": "Protégez votre entreprise dès aujourd’hui",
+    "ctaSubtitle": "Passez à Pro pour bénéficier d’analyses avancées, d’alertes et d’automatisation.",
+    "ctaPerk1": "Annulation possible à tout moment",
+    "ctaPerk2": "Paiements 100% sécurisés"
   },
   "settings": {
-    "title": "Réglages",
+    "title": "Paramètres",
     "language": "Langue de l’interface",
     "fields": {
       "email": "Email",
-      "name": "Nom",
+      "name": "Nom complet",
       "locale": "Langue"
     },
-    "note": "Les formulaires d’édition et mises à jour du profil peuvent être ajoutés ici via des server actions."
+    "note": "Les formulaires d’édition et de mise à jour du profil peuvent être ajoutés ici via des actions serveur.",
+    "passkeys": {
+      "title": "Clés d'accès",
+      "description": "Gérez vos clés d'accès pour une connexion sans mot de passe.",
+      "addButton": "Ajouter une clé d'accès",
+      "loading": "Chargement des clés d'accès...",
+      "noKeys": "Vous n'avez aucune clé d'accès enregistrée.",
+      "fetchError": "Impossible de charger vos clés d'accès.",
+      "addSuccess": "Clé d'accès ajoutée avec succès.",
+      "addError": "Échec de l'ajout de la clé d'accès.",
+      "nameRequiredError": "Veuillez donner un nom à votre clé d'accès.",
+      "deleteSuccess": "Clé d'accès supprimée.",
+      "deleteError": "Échec de la suppression de la clé d'accès.",
+      "table": {
+        "name": "Nom",
+        "createdAt": "Ajouté le",
+        "lastUsed": "Dernière utilisation",
+        "neverUsed": "Jamais"
+      },
+      "addDialog": {
+        "title": "Ajouter une nouvelle clé d'accès",
+        "description": "Suivez les instructions de votre navigateur ou appareil pour terminer la configuration.",
+        "inputLabel": "Nom de la clé d'accès",
+        "inputPlaceholder": "ex: Mon MacBook Pro",
+        "cancel": "Annuler",
+        "add": "Ajouter",
+        "adding": "Ajout en cours..."
+      },
+      "deleteDialog": {
+        "title": "Supprimer cette clé d'accès ?",
+        "description": "Êtes-vous sûr de vouloir supprimer la clé d'accès nommée \"{name}\"? Cette action est irréversible.",
+        "cancel": "Annuler",
+        "delete": "Supprimer"
+      },
+      "errors": {
+        "authenticatorPreviouslyRegistered": "Cet authentificateur a déjà été enregistré.",
+        "registrationOptionsError": "Impossible d'obtenir les options d'enregistrement.",
+        "verificationError": "Échec de la vérification.",
+        "missingCredentialData": "Données d'identification manquantes.",
+        "unauthorized": "Vous devez être connecté.",
+        "invalidInput": "Données d'entrée invalides.",
+        "noChallenge": "Aucun challenge d'enregistrement trouvé.",
+        "generalError": "Une erreur s'est produite lors du traitement de votre demande."
+      }
+    }
   },
   "notFound": {
     "title": "Page introuvable",
@@ -70,121 +118,149 @@
   },
   "auth": {
     "signin": {
-      "title": "Se connecter",
+      "title": "Connexion",
       "desc": "Ravi de vous revoir sur Minden",
       "email": "Email",
       "password": "Mot de passe",
       "submit": "Se connecter",
       "or": "ou",
-      "magicPlaceholder": "Email pour lien magique",
+      "magicPlaceholder": "Email pour le lien magique",
       "magicButton": "Envoyer le lien magique",
       "oauth": {
         "google": "Continuer avec Google",
         "github": "Continuer avec GitHub",
-        "apple": "Continuer avec Apple"
+        "apple": "Continuer avec Apple",
+        "oidc": "Continuer avec "
       },
-      "noAccount": "Pas de compte ?",
+      "passkey": {
+        "button": "Se connecter avec une clé d'accès",
+        "error": "Échec de l'authentification par clé d'accès",
+        "notSupported": "Les clés d'accès ne sont pas supportées dans ce navigateur"
+      },
+      "noAccount": "Pas encore de compte ?",
       "createOne": "Créer un compte",
-      "verifyPrompt": "Votre email n’est pas vérifié. Vérifiez avec un code ou un lien magique.",
+      "verifyPrompt": "Votre email n’est pas vérifié. Vérifiez le avec un lien magique.",
       "resendCode": "Renvoyer le code",
       "openInbox": "Ouvrir votre boîte mail",
       "toast": {
         "success": "Connexion réussie",
         "failed": "Échec de la connexion",
         "magicSent": "Lien magique envoyé",
-        "userNotFound": "Email introuvable",
-        "invalidPassword": "Mot de passe incorrect",
+        "invalidCreds": "Email ou mot de passe incorrect",
         "emailNotVerified": "Email non vérifié. Vérifiez votre boîte mail."
       }
     },
     "signup": {
-      "title": "Créer un compte",
+      "title": "Inscription",
       "desc": "Rejoignez Minden",
-      "name": "Nom",
+      "name": "Nom complet",
       "email": "Email",
-      "password": "Mot de passe (min 8 caractères)",
+      "password": "Mot de passe (min. 8 caractères)",
       "submit": "Créer un compte",
-      "haveAccount": "Vous avez déjà un compte ?",
+      "haveAccount": "Déjà inscrit ?",
       "signin": "Se connecter",
       "toast": {
-        "success": "Compte créé. Vérifiez votre email.",
-        "failed": "Échec de la création"
+        "success": "Compte créé. Vérifiez votre Email.",
+        "failed": "Échec de l’inscription",
+        "emailTaken": "Cette Email est déjà utilisée",
+        "invalidInput": "Veuillez vérifier vos informations",
+        "rateLimited": "Trop de tentatives. Veuillez réessayer plus tard."
       }
     },
     "verify": {
-      "title": "Vérifiez votre email",
-      "desc": "Entrez le code à 6 chiffres que nous vous avons envoyé",
-      "email": "Email",
-      "submit": "Vérifier",
-      "resend": "Renvoyer le code",
-      "codeSent": "Code envoyé.",
-      "verified": "Email vérifié. Vous pouvez maintenant vous connecter.",
-      "invalid": "Code invalide",
-      "emailRequired": "Email requis",
-      "rateLimited": "Trop de tentatives. Réessayez plus tard.",
+      "title": "Vérifiez votre e‑mail",
+      "desc": "Nous vous avons envoyé un lien magique. Ouvrez‑le pour vérifier votre e‑mail.",
+      "email": "Adresse e‑mail",
+      "resendMagic": "Renvoyer le lien magique",
+      "magicSent": "Lien magique envoyé.",
+      "verified": "Adresse e‑mail vérifiée. Vous pouvez maintenant vous connecter.",
+      "invalid": "Requête invalide",
+      "emailRequired": "Adresse e‑mail requise",
+      "rateLimited": "Trop de tentatives. Veuillez réessayer plus tard.",
       "tip": "Ou connectez‑vous avec un lien magique depuis la page de connexion."
     },
     "mfa": {
       "secretGenerated": "Secret généré",
-      "enabled": "MFA activée",
+      "enabled": "Authentification à deux facteurs activée",
       "invalid": "Code invalide"
     }
   },
   "machines": {
     "title": "Machines",
-    "switchTenant": "Changer de tenant",
-    "add": "Ajouter",
-    "none": "Aucune machine.",
-    "services": "Services",
-    "agentToken": "Token agent",
-    "agentTokenHelp": "Utilisez ce token dans l’agent pour authentifier la machine.",
-    "latestLogs": "Derniers logs",
+    "switchTenant": "Changer d’organisation",
+    "add": "Ajouter une machine",
+    "none": "Aucune machine enregistrée.",
+    "services": "Services surveillés",
+    "agentToken": "Token d’agent",
+    "agentTokenHelp": "Utilisez ce token avec l’agent pour authentifier la machine.",
+    "latestLogs": "Derniers journaux",
+    "edit": "Modifier la machine",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "name": "Nom de la machine",
+    "tokenHidden": "Le token est masqué pour des raisons de sécurité. Rotation possible via l’onboarding.",
+    "rotateToken": "Réinitialiser le token",
+    "newToken": "Nouveau token d’agent",
+    "tokenShownOnce": "Copiez et conservez ce token en lieu sûr. Il ne sera plus affiché.",
+    "close": "Fermer",
+    "confirmDelete": {
+      "title": "Confirmer la suppression",
+      "description": "Cette action est irréversible. La machine et ses données associées (services, journaux, alertes) seront définitivement supprimées.",
+      "confirm": "Supprimer",
+      "cancel": "Annuler"
+    },
     "onboard": {
       "method": "Méthode d’installation",
-      "token": "Token (copiez et gardez-le en sécurité)",
+      "token": "Token (copiez et conservez-le en sécurité)",
       "copy": "Copier",
       "command": "Commande d’installation",
-      "tokenNote": "Le token est affiché une seule fois. Rotations en cas de compromission.",
+      "tokenNote": "Le token est affiché une seule fois. Rotation recommandée en cas de compromission.",
       "waiting": "En attente de la connexion de l’agent...",
       "connected": "Agent connecté",
-      "lastHeartbeat": "Dernier heartbeat",
-      "continue": "Aller à la machine"
+      "lastHeartbeat": "Dernier signal reçu",
+      "continue": "Accéder à la machine"
+    },
+    "toast": {
+      "saved": "Machine mise à jour avec succès",
+      "deleted": "Machine supprimée",
+      "connected": "Agent connecté",
+      "tokenRotated": "Token réinitialisé",
+      "failed": "Échec de l’action"
     }
   },
   "tenants": {
-    "title": "Espace tenant",
-    "subtitle": "Sélectionnez un tenant actif pour accéder aux machines.",
-    "yourTenants": "Vos tenants",
+    "title": "Espace organisation",
+    "subtitle": "Sélectionnez une organisation active pour accéder aux machines.",
+    "yourTenants": "Vos organisations",
     "select": "Sélectionner",
-    "none": "Aucun tenant. Créez une demande.",
-    "requestTitle": "Demander un nouveau tenant",
-    "requestPlaceholder": "Nom de l’entreprise / particulier",
+    "none": "Aucune organisation. Créez une demande.",
+    "requestTitle": "Demander une nouvelle organisation",
+    "requestPlaceholder": "Nom de l’entreprise ou du particulier",
     "requestBtn": "Demander",
-    "pendingNote": "Votre tenant sera en statut PENDING jusqu’à validation par l’équipe.",
+    "pendingNote": "Votre organisation sera en statut PENDING jusqu’à validation par l’équipe.",
     "toast": {
-      "selected": "Tenant sélectionné",
-      "created": "Demande de tenant envoyée"
+      "selected": "Organisation sélectionnée",
+      "created": "Demande envoyée avec succès"
     }
-  }
-  ,
+  },
   "subscriptions": {
     "free": {
       "name": "Gratuit",
       "price": "0€",
       "features": {
-        "0": "Lire jusqu’à 10 événements/jour",
-        "1": "Créer un tenant",
-        "2": "Logs en direct basiques"
+        "0": "Jusqu’à 10 événements/jour",
+        "1": "Créer une organisation",
+        "2": "Journaux en direct basiques"
       },
-      "cta": "Commencer"
+      "cta": "Commencer gratuitement"
     },
     "pro": {
       "name": "Pro",
       "price": "19€ / mois",
       "features": {
-        "0": "Logs & alertes illimités",
-        "1": "Analyse IA & blocage auto",
-        "2": "Plusieurs machines par tenant"
+        "0": "Journaux & alertes illimités",
+        "1": "Analyse IA & blocage automatique",
+        "2": "Plusieurs machines par organisation"
       },
       "cta": "Passer à Pro"
     },
@@ -196,7 +272,7 @@
         "1": "Tableaux de bord partagés",
         "2": "Support prioritaire"
       },
-      "cta": "Contacter les ventes"
+      "cta": "Contacter le service commercial"
     }
   },
   "admin": {
@@ -206,9 +282,9 @@
     },
     "metrics": {
       "users": "Utilisateurs",
-      "tenants": "Tenants",
+      "tenants": "Organisations",
       "machines": "Machines",
-      "logs": "Événements de log"
+      "logs": "Événements de journal"
     },
     "charts": {
       "machinesCreated14": "Machines créées (14 jours)",
@@ -217,23 +293,23 @@
     "users": {
       "title": "Utilisateurs",
       "subtitle": "Utilisateurs récents (100 derniers)",
-      "search": "Rechercher des utilisateurs...",
+      "search": "Rechercher un utilisateur...",
       "email": "Email",
-      "name": "Nom",
+      "name": "Nom complet",
       "role": "Rôle",
-      "date": "Date",
-      "empty": "Aucun utilisateur"
+      "date": "Date d’inscription",
+      "empty": "Aucun utilisateur trouvé"
     },
     "settings": {
       "title": "Paramètres système",
-      "smtp": "SMTP",
+      "smtp": "Serveur SMTP",
       "host": "Hôte",
       "port": "Port",
       "user": "Utilisateur",
       "password": "Mot de passe",
       "from": "Expéditeur",
       "save": "Enregistrer",
-      "toast": { "saved": "Paramètres enregistrés" }
+      "toast": { "saved": "Paramètres enregistrés avec succès" }
     }
   }
 }

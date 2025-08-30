@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/prisma';
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Building2, Server, Activity } from 'lucide-react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+// Removed unused Table imports
 import { MachinesChart, UsersChart } from '@/components/admin/charts';
 import { getTranslations } from 'next-intl/server';
 export const metadata = { title: 'Admin' };

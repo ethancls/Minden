@@ -118,11 +118,10 @@ export function OnboardingPanel({
         )}
         <div className="mt-4">
           <Button asChild disabled={status !== 'ONLINE'}>
-            <a href={`/${locale}/machines/${machineId}`}>{t('onboard.continue')}</a>
+            <a href={`/${locale}/machines/${machineId}?toast=machine_connected`}>{t('onboard.continue')}</a>
           </Button>
         </div>
       </div>
     </div>
   );
 }
-

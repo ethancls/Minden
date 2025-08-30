@@ -2,8 +2,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { getMany, setSetting } from '@/lib/settings';
-import { prisma } from '@/lib/prisma';
 import { getTranslations } from 'next-intl/server';
+import type { SessionUser } from '@/models/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ export const metadata = { title: 'Admin Settings' };
 
 export default async function AdminSettingsPage({ params: { locale } }: { params: { locale: string } }) {
   const session = await getServerSession(authOptions);
-  const role = (session?.user as any)?.role;
+  const role = (session?.user as SessionUser | null)?.role;
   if (!session?.user || role !== 'ADMIN') redirect(`/${locale}`);
   const t = await getTranslations({ locale, namespace: 'admin.settings' });
   const current = await getMany(['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASSWORD','SMTP_FROM']);
@@ -24,7 +24,6 @@ export default async function AdminSettingsPage({ params: { locale } }: { params
       ['SMTP_USER', String(formData.get('SMTP_USER') || ''), true],
       ['SMTP_PASSWORD', String(formData.get('SMTP_PASSWORD') || ''), true],
       ['SMTP_FROM', String(formData.get('SMTP_FROM') || ''), false],
-      // HELP_URL removed; help path is fixed at /help
     ];
     for (const [key, value, isSecret] of pairs) {
       await setSetting(key, value, isSecret);

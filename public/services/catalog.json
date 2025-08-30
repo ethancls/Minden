@@ -1,0 +1,17 @@
+{
+  "services": [
+    {
+      "key": "nginx",
+      "name": "Nginx Web Server",
+      "description": "Static website served by Nginx (safe decoy).",
+      "logo": "/icons/nginx.svg",
+      "compose": {
+        "image": "nginx:alpine",
+        "containerPorts": [80],
+        "env": {},
+        "labels": { "com.minden": "1" }
+      }
+    }
+  ]
+}
+

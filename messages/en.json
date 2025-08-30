@@ -1,10 +1,12 @@
 {
   "app": {
     "name": "Minden",
-    "tagline": "Smart honeypots. Safer networks.",
-    "ctaExplore": "Explore Trending",
-    "ctaSignup": "Get Started"
+    "tagline": "Intelligent honeypots. Effortless network security.",
+    "ctaExplore": "Discover Trends",
+    "ctaSignup": "Start Now"
   },
+  "dashboard": { "title": "Dashboard" },
+  "alerts": { "title": "Security Alerts" },
   "nav": {
     "trending": "Trending",
     "categories": "Categories",
@@ -12,10 +14,11 @@
     "settings": "Settings",
     "myPills": "My Pills",
     "new": "New",
-    "logout": "Logout",
+    "logout": "Log out",
     "searchPlaceholder": "Search...",
     "signin": "Sign in",
     "signup": "Sign up",
+    "dashboard": "Dashboard",
     "machines": "Machines",
     "alerts": "Alerts",
     "subscriptions": "Subscriptions",
@@ -24,7 +27,8 @@
     "lang": {
       "en": "English - EN",
       "fr": "Français - FR",
-      "ru": "Русский - RU"
+      "ru": "Русский - RU",
+      "ja": "日本語 - JA"
     }
   },
   "footer": {
@@ -34,149 +38,220 @@
     "github": "GitHub"
   },
   "landing": {
-    "heroTitle": "Protect and learn from attacks — safely",
-    "heroSubtitle": "Spin up realistic honeypots, stream live logs, and let AI detect threats and auto‑respond across your tenants.",
-    "ctaPlans": "View plans",
+    "heroTitle": "Protect and learn from attacks — with confidence",
+    "heroSubtitle": "Deploy realistic honeypots, stream live logs, and let AI detect threats and respond automatically for every organization.",
+    "ctaPlans": "See Plans",
     "features": {
-      "f1": { "title": "Realistic decoys", "desc": "Credible services to mislead attackers." },
-      "f2": { "title": "AI & alerts", "desc": "Log analysis and automated blocking." },
-      "f3": { "title": "Multi‑tenant", "desc": "One tenant per organization or person." },
-      "f4": { "title": "Trust & monitoring", "desc": "Live streams, audit, export." }
+      "f1": { "title": "Realistic Decoys", "desc": "Credible services to mislead attackers." },
+      "f2": { "title": "AI & Alerts", "desc": "Smart log analysis and automated blocking." },
+      "f3": { "title": "Multi‑organization", "desc": "A dedicated space for each company or user." },
+      "f4": { "title": "Trust & Monitoring", "desc": "Live streams, audit, and data export." }
     },
     "highlights": {
-      "h1": { "title": "Realistic honeypots", "desc": "Decoy attackers with credible services." },
-      "h2": { "title": "Live logs", "desc": "Real-time event streams for better visibility." },
-      "h3": { "title": "AI alerts", "desc": "Detect, correlate and block suspicious activity." }
+      "h1": { "title": "Advanced Honeypots", "desc": "Decoy attackers with credible and varied services." },
+      "h2": { "title": "Live Logs", "desc": "Real-time event tracking for optimal visibility." },
+      "h3": { "title": "AI Alerts", "desc": "Detect, correlate, and block suspicious activity using AI." }
     },
-    "ctaTitle": "Start protecting today",
-    "ctaSubtitle": "Upgrade to Pro for advanced analytics, alerts and automation.",
+    "ctaTitle": "Protect your business today",
+    "ctaSubtitle": "Upgrade to Pro for advanced analytics, alerts, and automation.",
     "ctaPerk1": "Cancel anytime",
-    "ctaPerk2": "Secure payments"
+    "ctaPerk2": "100% secure payments"
   },
   "settings": {
     "title": "Settings",
     "language": "Interface language",
     "fields": {
-      "email": "Email",
-      "name": "Name",
-      "locale": "Locale"
+      "email": "Email address",
+      "name": "Full name",
+      "locale": "Language"
     },
-    "note": "Edit forms and profile updates can be added here with server actions."
+    "note": "Edit forms and profile updates can be added here using server actions.",
+    "passkeys": {
+      "title": "Passkeys",
+      "description": "Manage your passkeys for passwordless sign-in.",
+      "addButton": "Add a new passkey",
+      "loading": "Loading passkeys...",
+      "noKeys": "You have no passkeys registered.",
+      "fetchError": "Could not load your passkeys.",
+      "addSuccess": "Passkey added successfully.",
+      "addError": "Failed to add passkey",
+      "nameRequiredError": "Please give your passkey a name.",
+      "deleteSuccess": "Passkey deleted.",
+      "deleteError": "Failed to delete passkey.",
+      "table": {
+        "name": "Name",
+        "createdAt": "Added on",
+        "lastUsed": "Last used",
+        "neverUsed": "Never"
+      },
+      "addDialog": {
+        "title": "Add a new passkey",
+        "description": "Follow the instructions from your browser or device to complete the setup.",
+        "inputLabel": "Passkey name",
+        "inputPlaceholder": "e.g., My MacBook Pro",
+        "cancel": "Cancel",
+        "add": "Add",
+        "adding": "Adding..."
+      },
+      "deleteDialog": {
+        "title": "Delete this passkey?",
+        "description": "Are you sure you want to delete the passkey named \"{name}\"? This action cannot be undone.",
+        "cancel": "Cancel",
+        "delete": "Delete"
+      },
+      "errors": {
+        "authenticatorPreviouslyRegistered": "This authenticator has already been registered.",
+        "registrationOptionsError": "Failed to get registration options.",
+        "verificationError": "Verification failed.",
+        "missingCredentialData": "Missing credential data.",
+        "unauthorized": "You must be logged in.",
+        "invalidInput": "Invalid input data.",
+        "noChallenge": "No registration challenge found.",
+        "generalError": "An error occurred while processing your request."
+      }
+    }
   },
   "notFound": {
     "title": "Page not found",
-    "description": "The page you’re looking for doesn’t exist or has moved.",
+    "description": "The page you’re looking for doesn’t exist or has been moved.",
     "goHome": "Back to home"
   },
   "auth": {
     "signin": {
       "title": "Sign in",
       "desc": "Welcome back to Minden",
-      "email": "Email",
+      "email": "Email address",
       "password": "Password",
       "submit": "Sign in",
       "or": "or",
-      "magicPlaceholder": "Email for magic link",
+      "magicPlaceholder": "Email address for magic link",
       "magicButton": "Send magic link",
       "oauth": {
         "google": "Continue with Google",
         "github": "Continue with GitHub",
         "apple": "Continue with Apple"
       },
-      "noAccount": "No account?",
+      "passkey": {
+        "button": "Sign in with passkey",
+        "error": "Passkey authentication failed",
+        "notSupported": "Passkeys are not supported in this browser"
+      },
+      "noAccount": "No account yet?",
       "createOne": "Create one",
-      "verifyPrompt": "Your email is not verified. Verify with a code or a magic link.",
+      "verifyPrompt": "Your email address is not verified. Verify with a code or a magic link.",
       "resendCode": "Resend code",
       "openInbox": "Open your inbox",
       "toast": {
-        "success": "Signed in",
+        "success": "Signed in successfully",
         "failed": "Sign in failed",
         "magicSent": "Magic link sent",
-        "userNotFound": "Email not found",
-        "invalidPassword": "Incorrect password",
-        "emailNotVerified": "Email not verified. Check your inbox."
+        "invalidCreds": "Email address or password is incorrect",
+        "emailNotVerified": "Email address not verified. Check your inbox."
       }
     },
     "signup": {
-      "title": "Create account",
+      "title": "Sign up",
       "desc": "Join Minden",
-      "name": "Name",
-      "email": "Email",
-      "password": "Password (min 8 chars)",
-      "submit": "Sign up",
-      "haveAccount": "Already have an account?",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password (min. 8 characters)",
+      "submit": "Create account",
+      "haveAccount": "Already registered?",
       "signin": "Sign in",
       "toast": {
-        "success": "Account created. Check your email.",
-        "failed": "Sign up failed"
+        "success": "Account created. Check your email address.",
+        "failed": "Sign up failed",
+        "emailTaken": "This email address is already in use",
+        "invalidInput": "Please check your information",
+        "rateLimited": "Too many attempts. Please try again later."
       }
     },
     "verify": {
       "title": "Verify your email",
-      "desc": "Enter the 6-digit code we sent you",
-      "email": "Email",
-      "submit": "Verify",
-      "resend": "Resend code",
-      "codeSent": "Code sent.",
-      "verified": "Email verified. You can now sign in.",
-      "invalid": "Invalid code",
-      "emailRequired": "Email required",
-      "rateLimited": "Too many attempts. Try again later.",
+      "desc": "We sent you a magic link. Open it to verify your email.",
+      "email": "Email address",
+      "resendMagic": "Resend magic link",
+      "magicSent": "Magic link sent.",
+      "verified": "Email address verified. You can now sign in.",
+      "invalid": "Invalid request",
+      "emailRequired": "Email address required",
+      "rateLimited": "Too many attempts. Please try again later.",
       "tip": "Or sign in with a magic link from the sign in page."
     },
     "mfa": {
       "secretGenerated": "Secret generated",
-      "enabled": "MFA enabled",
+      "enabled": "Two-factor authentication enabled",
       "invalid": "Invalid code"
     }
   },
   "machines": {
     "title": "Machines",
-    "switchTenant": "Switch tenant",
-    "add": "Add",
-    "none": "No machines yet.",
-    "services": "Services",
+    "switchTenant": "Switch organization",
+    "add": "Add machine",
+    "none": "No machines registered.",
+    "services": "Monitored services",
     "agentToken": "Agent token",
-    "agentTokenHelp": "Use this token in the agent to authenticate the machine.",
+    "agentTokenHelp": "Use this token with the agent to authenticate the machine.",
     "latestLogs": "Latest logs",
+    "edit": "Edit machine",
+    "delete": "Delete",
+    "save": "Save",
+    "name": "Machine name",
+    "tokenHidden": "Token is hidden for security. Rotation available via onboarding.",
+    "rotateToken": "Reset token",
+    "newToken": "New agent token",
+    "tokenShownOnce": "Copy and store this token safely. It will not be shown again.",
+    "close": "Close",
+    "confirmDelete": {
+      "title": "Confirm deletion",
+      "description": "This action is irreversible. The machine and its associated data (services, logs, alerts) will be permanently deleted.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
     "onboard": {
       "method": "Installation method",
       "token": "Token (copy and keep safe)",
       "copy": "Copy",
       "command": "Install command",
-      "tokenNote": "The token is shown once. Rotate it if compromised.",
+      "tokenNote": "The token is shown only once. Rotation recommended if compromised.",
       "waiting": "Waiting for the agent to connect...",
       "connected": "Agent connected",
-      "lastHeartbeat": "Last heartbeat",
-      "continue": "Continue to machine"
+      "lastHeartbeat": "Last signal received",
+      "continue": "Go to machine"
+    },
+    "toast": {
+      "saved": "Machine updated successfully",
+      "deleted": "Machine deleted",
+      "connected": "Agent connected",
+      "tokenRotated": "Token reset",
+      "failed": "Action failed"
     }
   },
   "tenants": {
-    "title": "Tenant space",
-    "subtitle": "Select an active tenant to access machines.",
-    "yourTenants": "Your tenants",
+    "title": "Organization space",
+    "subtitle": "Select an active organization to access machines.",
+    "yourTenants": "Your organizations",
     "select": "Select",
-    "none": "No tenant yet. Create a request.",
-    "requestTitle": "Request a new tenant",
-    "requestPlaceholder": "Company / personal name",
+    "none": "No organizations. Create a request.",
+    "requestTitle": "Request a new organization",
+    "requestPlaceholder": "Company or personal name",
     "requestBtn": "Request",
-    "pendingNote": "Your tenant will be PENDING until approved by the team.",
+    "pendingNote": "Your organization will be PENDING until approved by the team.",
     "toast": {
-      "selected": "Tenant selected",
-      "created": "Tenant request submitted"
+      "selected": "Organization selected",
+      "created": "Request sent successfully"
     }
-  }
-  ,
+  },
   "subscriptions": {
     "free": {
       "name": "Free",
       "price": "$0",
       "features": {
-        "0": "Read up to 10 events/day",
-        "1": "Create one tenant",
+        "0": "Up to 10 events/day",
+        "1": "Create an organization",
         "2": "Basic live logs"
       },
-      "cta": "Get started"
+      "cta": "Start for free"
     },
     "pro": {
       "name": "Pro",
@@ -184,9 +259,9 @@
       "features": {
         "0": "Unlimited logs & alerts",
         "1": "AI analysis & auto-blocking",
-        "2": "Multiple machines per tenant"
+        "2": "Multiple machines per organization"
       },
-      "cta": "Upgrade"
+      "cta": "Upgrade to Pro"
     },
     "team": {
       "name": "Team",
@@ -202,11 +277,11 @@
   "admin": {
     "dashboard": {
       "title": "Dashboard",
-      "subtitle": "Overview of system activity"
+      "subtitle": "System activity overview"
     },
     "metrics": {
       "users": "Users",
-      "tenants": "Tenants",
+      "tenants": "Organizations",
       "machines": "Machines",
       "logs": "Log events"
     },
@@ -218,22 +293,22 @@
       "title": "Users",
       "subtitle": "Recent users (latest 100)",
       "search": "Search users...",
-      "email": "Email",
-      "name": "Name",
+      "email": "Email address",
+      "name": "Full name",
       "role": "Role",
-      "date": "Date",
+      "date": "Registration date",
       "empty": "No users found"
     },
     "settings": {
       "title": "System settings",
-      "smtp": "SMTP",
+      "smtp": "SMTP server",
       "host": "Host",
       "port": "Port",
       "user": "User",
       "password": "Password",
-      "from": "From",
+      "from": "Sender",
       "save": "Save",
-      "toast": { "saved": "Settings saved" }
+      "toast": { "saved": "Settings saved successfully" }
     }
   }
 }

@@ -1,4 +1,3 @@
-import { config } from 'node:process';
 import { PrismaClient } from '@prisma/client';
 
 const email = process.argv[2];

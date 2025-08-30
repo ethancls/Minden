@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-export default function MfaPage({ params: { locale } }: { params: { locale: string } }) {
+export default function MfaPage() {
   const tMfa = useTranslations('auth.mfa');
   const [secret, setSecret] = useState<string | null>(null);
   const [otpauth, setOtpauth] = useState<string | null>(null);

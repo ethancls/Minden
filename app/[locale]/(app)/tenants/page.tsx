@@ -1,3 +1,4 @@
+import { SessionUser } from '@/models/types';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -16,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function TenantsPage({ params: { locale } }: { params: { locale: string } }) {
   const session = await getServerSession(authOptions);
   if (!session?.user) redirect(`/${locale}/auth/signin`);
-  const userId = (session.user as any).id as string;
+  const userId = (session.user as SessionUser).id;
   const memberships = await prisma.tenantMember.findMany({ where: { userId }, include: { tenant: true } });
   const currentTenantId = cookies().get('tenantId')?.value;
 

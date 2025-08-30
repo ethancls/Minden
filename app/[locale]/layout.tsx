@@ -4,9 +4,7 @@ import type { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 import { locales, type Locale } from '@/lib/i18n/config';
-import { notFound } from 'next/navigation';
 import { AppProviders } from '@/components/app-providers';
 import { VibrantMesh } from '@/components/backgrounds/VibrantMesh';
 import { getServerSession } from 'next-auth';
@@ -43,7 +41,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} >
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppProviders session={session}>
@@ -55,7 +53,6 @@ export default async function RootLayout({
               <ToastEvents />
               <main className="container relative z-10 py-8">{children}</main>
             </div>
-            <Footer locale={locale} />
           </AppProviders>
         </NextIntlClientProvider>
       </body>

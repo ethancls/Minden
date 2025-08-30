@@ -1,3 +1,4 @@
+import { SessionUser } from '@/models/types';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -8,7 +9,7 @@ import { slugify } from '@/lib/slugify';
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
-  const userId = (session.user as any).id as string;
+  const userId = (session.user as SessionUser).id;
   const tenants = await prisma.tenantMember.findMany({
     where: { userId },
     include: { tenant: true },
@@ -21,7 +22,7 @@ const CreateSchema = z.object({ name: z.string().min(3).max(64) });
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
-  const userId = (session.user as any).id as string;
+  const userId = (session.user as SessionUser).id;
   const body = await req.json();
   const parsed = CreateSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'INVALID_INPUT' }, { status: 400 });

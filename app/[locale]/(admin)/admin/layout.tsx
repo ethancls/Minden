@@ -2,10 +2,11 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { AdminSidebar } from '@/components/admin/sidebar';
+import type { SessionUser } from '@/models/types';
 
 export default async function AdminLayout({ children, params: { locale } }: { children: React.ReactNode; params: { locale: string } }) {
   const session = await getServerSession(authOptions);
-  const role = (session?.user as any)?.role;
+  const role = (session?.user as SessionUser | null)?.role;
   if (!session?.user || role !== 'ADMIN') redirect(`/${locale}`);
   const base = `/${locale}`;
   return (

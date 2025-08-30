@@ -1,12 +1,10 @@
 "use client";
 import * as React from 'react';
 import { useSession, signIn } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
 import { LogoLoader } from '@/components/ui/logo-loader';
 
 export function Protected({ children }: { children: React.ReactNode }) {
   const { status } = useSession();
-  const pathname = usePathname();
   const triggered = React.useRef(false);
 
   React.useEffect(() => {

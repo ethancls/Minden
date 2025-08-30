@@ -10,6 +10,7 @@ export function ToastEvents() {
   const pathname = usePathname();
   const tTenants = useTranslations('tenants');
   const tAdminSettings = useTranslations('admin.settings');
+  const tMachines = useTranslations('machines');
 
   useEffect(() => {
     const key = sp.get('toast');
@@ -24,6 +25,15 @@ export function ToastEvents() {
       case 'settings_saved':
         toast.success(tAdminSettings('toast.saved'));
         break;
+      case 'machine_saved':
+        toast.success(tMachines('toast.saved'));
+        break;
+      case 'machine_deleted':
+        toast.success(tMachines('toast.deleted'));
+        break;
+      case 'machine_connected':
+        toast.success(tMachines('toast.connected'));
+        break;
       default:
         break;
     }
@@ -31,7 +41,7 @@ export function ToastEvents() {
     const next = new URLSearchParams(Array.from(sp.entries()));
     next.delete('toast');
     router.replace(`${pathname}${next.size ? `?${next.toString()}` : ''}`);
-  }, [sp, pathname, router, tTenants]);
+  }, [sp, pathname, router, tTenants, tAdminSettings, tMachines]);
 
   return null;
 }

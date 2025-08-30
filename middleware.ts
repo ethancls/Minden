@@ -29,7 +29,7 @@ export default async function middleware(req: NextRequest) {
 
   // Define auth routes and protected routes (URL after locale)
   const isAuthRoute = rest.startsWith('/auth');
-  const isProtectedRoute = ['/machines', '/settings', '/tenants', '/admin']
+  const isProtectedRoute = ['/dashboard', '/alerts', '/machines', '/settings', '/tenants', '/admin']
     .some((p) => rest.startsWith(p));
 
   // Read NextAuth JWT token (strategy: 'jwt')

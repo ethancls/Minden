@@ -19,7 +19,7 @@ export function encryptSecret(plain: string): string {
 
 export function decryptSecret(payload: string): string {
   if (!payload.startsWith('v1:')) return payload;
-  const [_v, ivHex, tagHex, ctHex] = payload.split(':');
+  const [, ivHex, tagHex, ctHex] = payload.split(':');
   const key = getKey();
   const iv = Buffer.from(ivHex, 'hex');
   const tag = Buffer.from(tagHex, 'hex');

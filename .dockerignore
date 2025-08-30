@@ -1,0 +1,29 @@
+# Node / Next.js
+node_modules
+.next/cache
+.next/server/**/*.map
+.next/types
+
+# Local env and logs
+.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Git
+.git
+.gitignore
+
+# Editors
+.vscode
+.idea
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+
+# Misc build artifacts
+dist
+coverage
+

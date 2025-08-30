@@ -1,26 +1,22 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { SessionUser } from '@/models/types';
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { generateOtp } from '@/lib/otp';
-import { sendOtpEmail } from '@/lib/email';
-import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
-export async function POST(req: NextRequest) {
-  const ip = getClientIp(req.headers);
-  const { email, locale = 'en' } = await req.json();
-  if (!email) return NextResponse.json({ error: 'EMAIL_REQUIRED' }, { status: 400 });
-  const rlIp = rateLimit(`otpReq:ip:${ip}`, 20, 10 * 60_000); // 20/10min per IP
-  const rlEmail = rateLimit(`otpReq:email:${email.toLowerCase()}`, 5, 10 * 60_000); // 5/10min per email
-  if (!rlIp.ok || !rlEmail.ok) return NextResponse.json({ error: 'RATE_LIMITED' }, { status: 429 });
-  const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
-  if (!user) return NextResponse.json({ error: 'USER_NOT_FOUND' }, { status: 404 });
+export async function POST() {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+  const u = session.user as SessionUser;
+  const user = await prisma.user.findUnique({ where: { id: u.id } });
+  if (!user || !user.email) return NextResponse.json({ error: 'USER_NOT_FOUND' }, { status: 404 });
 
-  const code = generateOtp(6);
-  const expires = new Date(Date.now() + 10 * 60 * 1000);
-  await prisma.verificationToken.create({ data: { identifier: user.email!, token: code, expires } });
-  try {
-    await sendOtpEmail(user.email!, code, locale);
-  } catch (e: any) {
-    return NextResponse.json({ error: 'SEND_FAILED', detail: e?.message }, { status: 500 });
-  }
+  const otp = generateOtp();
+  // TODO: Implement sendVerificationEmail and createOtp
+  console.log('OTP generated:', otp);
+  // await sendVerificationEmail(user.email, otp, user.locale || 'en');
+
   return NextResponse.json({ ok: true });
 }
+

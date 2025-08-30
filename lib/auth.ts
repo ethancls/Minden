@@ -1,4 +1,4 @@
-import type { NextAuthOptions, Session } from 'next-auth';
+import type { NextAuthOptions, Session, User } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -7,9 +7,10 @@ import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import AppleProvider from 'next-auth/providers/apple';
 import bcrypt from 'bcryptjs';
+import type { SessionUser } from '@/models/types';
 
 function providers() {
-  const list: any[] = [];
+  const list = [];
 
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
     list.push(
@@ -36,11 +37,7 @@ function providers() {
     list.push(
       AppleProvider({
         clientId: process.env.APPLE_CLIENT_ID!,
-        clientSecret: {
-          privateKey: process.env.APPLE_PRIVATE_KEY!.split(/\\n/).join('\n'),
-          keyId: process.env.APPLE_KEY_ID!,
-          teamId: process.env.APPLE_TEAM_ID!,
-        },
+        clientSecret: process.env.APPLE_CLIENT_SECRET || '',
       })
     );
   }
@@ -66,6 +63,13 @@ function providers() {
         from: process.env.SMTP_FROM,
         // Custom email template for magic links
         async sendVerificationRequest({ identifier, url }) {
+          // Only send magic link for existing users to avoid user enumeration.
+          const { prisma } = await import('@/lib/prisma');
+          const user = await prisma.user.findUnique({ where: { email: identifier.toLowerCase() } });
+          if (!user) {
+            // Do not send; silently ignore to avoid enumeration.
+            return;
+          }
           const { sendMagicLinkEmail, guessLocaleFromUrl } = await import('@/lib/email');
           const locale = guessLocaleFromUrl(url);
           await sendMagicLinkEmail(identifier, url, locale);
@@ -87,26 +91,77 @@ function providers() {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email.toLowerCase() },
         });
+        // Generic invalid credentials to avoid enumeration
         if (!user || !user.passwordHash) {
-          throw new Error('USER_NOT_FOUND');
-        }
-        if (!user.emailVerified) {
-          // Require verification for local login; use magic link to verify
-          throw new Error('EMAIL_NOT_VERIFIED');
+          throw new Error('INVALID_CREDENTIALS');
         }
         const valid = await bcrypt.compare(
           credentials.password,
           user.passwordHash
         );
         if (!valid) {
-          throw new Error('INVALID_PASSWORD');
+          throw new Error('INVALID_CREDENTIALS');
+        }
+        // Only after validating credentials, enforce email verification
+        if (!user.emailVerified) {
+          // Require verification for local login; use magic link to verify
+          throw new Error('EMAIL_NOT_VERIFIED');
         }
         return {
           id: user.id,
           email: user.email!,
           name: user.name ?? undefined,
           image: user.image ?? undefined,
-        } as any;
+        } satisfies User;
+      },
+    })
+  );
+
+  // Passkey provider (WebAuthn)
+  list.push(
+    CredentialsProvider({
+      id: 'passkey',
+      name: 'Passkey',
+      credentials: {
+        credential: { label: 'credential', type: 'text' },
+        challengeId: { label: 'challengeId', type: 'text' },
+      },
+      async authorize(credentials) {
+        try {
+          if (!credentials?.credential || !credentials?.challengeId) return null;
+
+          // Use our verification API route
+          const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+          const verifyResponse = await fetch(`${baseUrl}/api/auth/webauthn/authentication/verify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              credential: JSON.parse(credentials.credential),
+              challengeId: credentials.challengeId
+            })
+          });
+
+          if (!verifyResponse.ok) {
+            console.error('Passkey verification failed:', await verifyResponse.text());
+            return null;
+          }
+
+          const result = await verifyResponse.json();
+          
+          if (result.verified && result.user) {
+            return {
+              id: result.user.id,
+              email: result.user.email,
+              name: result.user.name,
+              image: result.user.image
+            } satisfies User;
+          }
+
+          return null;
+        } catch (error) {
+          console.error('Passkey authentication error:', error);
+          return null;
+        }
       },
     })
   );
@@ -117,7 +172,7 @@ function providers() {
 const secureCookies = (process.env.NEXTAUTH_URL || '').startsWith('https://');
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt', maxAge: 60 * 60 * 8 },
   useSecureCookies: secureCookies,
   pages: {
@@ -125,13 +180,14 @@ export const authOptions: NextAuthOptions = {
   },
   providers: providers(),
   callbacks: {
-    async session({ token, session }) {
+    async session({ token, session }): Promise<Session & { user: SessionUser }> {
       if (token && session.user) {
-        (session.user as any).id = token.sub;
-        (session.user as any).role = (token as any).role || 'USER';
-        (session.user as any).locale = (token as any).locale || 'en';
+        const sessionUser = session.user as SessionUser;
+        sessionUser.id = token.sub!;
+        sessionUser.role = (token.role as string) || 'USER';
+        sessionUser.locale = (token.locale as string) || 'en';
       }
-      return session as Session;
+      return session as Session & { user: SessionUser };
     },
     async jwt({ token, user, account }) {
       if (user) {

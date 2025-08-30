@@ -5,9 +5,11 @@ import { prisma } from '@/lib/prisma';
 import { cookies, headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { ServiceSelector } from '@/components/machines/ServiceSelector';
 import { OnboardingPanel } from '@/components/machines/OnboardingPanel';
 import { getTranslations } from 'next-intl/server';
 import crypto from 'crypto';
+import type { SessionUser } from '@/models/types';
 export const metadata = { title: 'New Machine' };
 
 async function createMachine(formData: FormData, locale: string) {
@@ -18,7 +20,7 @@ async function createMachine(formData: FormData, locale: string) {
     const signin = base ? `${base}/${locale}/auth/signin?callbackUrl=${encodeURIComponent(`${base}/${locale}/machines/new`)}` : `/${locale}/auth/signin?callbackUrl=/${locale}/machines/new`;
     redirect(signin);
   }
-  const userId = (session.user as any).id as string;
+  const userId = (session.user as SessionUser).id;
   const tenantId = cookies().get('tenantId')?.value;
   if (!tenantId) redirect(`/${locale}/tenants`);
   const member = await prisma.tenantMember.findUnique({ where: { tenantId_userId: { tenantId, userId } }, include: { tenant: true } });
@@ -37,6 +39,11 @@ async function createMachine(formData: FormData, locale: string) {
   return { ok: true, machineId: machine.id, name, token: plaintext, baseUrl: base.replace(/\/$/, '') };
 }
 
+declare global {
+  // eslint-disable-next-line no-var
+  var _createResult: { ok: boolean; machineId: string; name: string; token: string; baseUrl: string } | { error: string } | undefined;
+}
+
 export default async function NewMachinePage({ params: { locale } }: { params: { locale: string } }) {
   const session = await getServerSession(authOptions);
   if (!session?.user) redirect(`/${locale}/auth/signin`);
@@ -48,24 +55,20 @@ export default async function NewMachinePage({ params: { locale } }: { params: {
       <form action={async (fd) => {
         'use server';
         const res = await createMachine(fd, locale);
-        (global as any)._createResult = res; // store temp to render below
+        globalThis._createResult = res; // store temp to render below
       }} className="space-y-4">
         <div>
           <Input name="name" placeholder="machine-01" required />
         </div>
         <div className="space-y-2">
           <div className="text-sm text-muted-foreground">Services</div>
-          <div className="grid grid-cols-2 gap-2">
-            {['ssh','http','ftp','smtp','mysql'].map(s => (
-              <label key={s} className="flex items-center gap-2 text-sm"><input type="checkbox" name="services" value={s} /> {s.toUpperCase()}</label>
-            ))}
-          </div>
+          <ServiceSelector name="services" />
         </div>
         <Button type="submit">{t('add')}</Button>
       </form>
 
-      {((global as any)._createResult?.ok) && (() => {
-        const res = (global as any)._createResult as { machineId: string; token: string; baseUrl: string };
+      {(global._createResult && 'ok' in global._createResult && global._createResult.ok) && (() => {
+        const res = global._createResult as { machineId: string; token: string; baseUrl: string };
         return (
           <OnboardingPanel
             locale={locale}

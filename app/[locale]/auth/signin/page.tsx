@@ -6,18 +6,28 @@ import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Github, Eye, EyeOff } from 'lucide-react';
+import { Github, Eye, EyeOff, Fingerprint } from 'lucide-react';
+import { startAuthentication } from '@simplewebauthn/browser';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
+interface Providers {
+  [key: string]: {
+    id: string;
+    name: string;
+    type: string;
+    signinUrl: string;
+    callbackUrl: string;
+  };
+}
+
 export default function SignInPage({ params: { locale } }: { params: { locale: string } }) {
   const t = useTranslations('auth.signin');
-  const tVerify = useTranslations('auth.verify');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [needsVerify, setNeedsVerify] = useState(false);
-  const [providers, setProviders] = useState<any | null>(null);
+  const [providers, setProviders] = useState<Providers | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const sp = useSearchParams();
   const callbackUrl = sp.get('callbackUrl') ?? `/${locale}`;
@@ -49,9 +59,8 @@ export default function SignInPage({ params: { locale } }: { params: { locale: s
       setNeedsVerify(true);
       toast.info(t('toast.emailNotVerified'));
     } else {
-      if (res?.error === 'USER_NOT_FOUND') toast.error(t('toast.userNotFound'));
-      else if (res?.error === 'INVALID_PASSWORD') toast.error(t('toast.invalidPassword'));
-      else toast.error(t('toast.failed'));
+      // Avoid enumeration: generic invalid credentials
+      toast.error(t('toast.invalidCreds'));
     }
   }
 
@@ -64,11 +73,18 @@ export default function SignInPage({ params: { locale } }: { params: { locale: s
     else toast.error(res?.error || t('toast.failed'));
   }
 
-  async function resendOtp() {
+  async function resendMagic() {
     setLoading(true);
-    const res = await fetch('/api/auth/otp/request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, locale }) });
-    setLoading(false);
-    if (res.ok) toast.success(tVerify('codeSent'));
+    try {
+      const callbackUrl = `/${locale}`;
+      const mod = await import('next-auth/react');
+      await mod.signIn('email', { email, callbackUrl, redirect: false });
+      toast.success(t('toast.magicSent'));
+    } catch {
+      toast.error(t('toast.failed'));
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -81,6 +97,51 @@ export default function SignInPage({ params: { locale } }: { params: { locale: s
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-2">
+            <Button onClick={async () => {
+              try {
+                // Check for WebAuthn support
+                if (!window.PublicKeyCredential) {
+                  toast.error(t('passkey.notSupported'));
+                  return;
+                }
+
+                const r = await fetch('/api/auth/webauthn/authentication/options', { method: 'POST' });
+                if (!r.ok) {
+                  const errorText = await r.text();
+                  console.error('Failed to get passkey options:', errorText);
+                  toast.error(t('passkey.error'));
+                  return;
+                }
+                
+                const data = await r.json();
+                const assertion = await startAuthentication(data);
+                
+                const { signIn } = await import('next-auth/react');
+                const res = await signIn('passkey', { 
+                  credential: JSON.stringify(assertion), 
+                  challengeId: data.challengeId, 
+                  redirect: false 
+                });
+                
+                if (res?.ok) {
+                  toast.success(t('toast.success'));
+                  window.location.href = callbackUrl;
+                } else {
+                  console.error('Passkey signin error:', res?.error);
+                  toast.error(t('passkey.error'));
+                }
+              } catch (error: unknown) {
+                console.error('Passkey authentication failed:', error);
+                if (error instanceof Error && (error.name === 'NotAllowedError' || error.message?.includes('cancelled'))) {
+                  // User cancelled, don't show error
+                  return;
+                }
+                toast.error(t('passkey.error'));
+              }
+            }} variant="outline" className="justify-start gap-2">
+              <Fingerprint className="h-4 w-4" />
+              {t('passkey.button')}
+            </Button>
             {providers?.google && (
             <Button onClick={() => signIn('google', { callbackUrl })} variant="outline" className="justify-start gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12 c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C33.64,6.053,29.084,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20 s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,16.108,18.961,14,24,14c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657 C33.64,6.053,29.084,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.197l-6.191-5.238C29.211,35.091,26.715,36,24,36 c-5.202,0-9.619-3.317-11.274-7.946l-6.52,5.025C9.5,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.094,5.565 c0.001-0.001,0.002-0.001,0.003-0.002l6.191,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
@@ -120,8 +181,7 @@ export default function SignInPage({ params: { locale } }: { params: { locale: s
             <div className="rounded-md border bg-accent p-3 text-sm">
               <div className="mb-2">{t('verifyPrompt')}</div>
               <div className="flex gap-2">
-                <Button variant="outline" onClick={resendOtp}>{t('resendCode')}</Button>
-                <Button variant="outline" onClick={onMagicLink}>{t('magicButton')}</Button>
+                <Button variant="outline" onClick={resendMagic}>{t('magicButton')}</Button>
               </div>
             </div>
           )}
